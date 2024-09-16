@@ -5,6 +5,31 @@
 body{
     background-color: #000000;
 }
+/* Style the buttons */
+button {
+  background-color: #4CAF50; /* Green */
+  color: #ffffff; /* White */
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Hover effect */
+button:hover {
+  background-color: #3e8e41; /* Darker green */
+}
+
+/* Active effect */
+button:active {
+  background-color: #3e8e41; /* Darker green */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Add some space between buttons */
+button + button {
+  margin-left: 10px;
+}
 header{
     display: flex;
     background-color: #000000;
