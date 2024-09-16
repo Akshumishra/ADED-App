@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify, render_template
-
+import base64
 app = Flask(__name__)
 
 @app.route('/')
@@ -15,12 +15,10 @@ def run_code():
         message = request.form['message']
         password = request.form['password']
         if action == 'encrypt':
-        # Execute encryption program
             result = encrypt_program(message, password)
         elif action == 'decrypt':
-        # Execute decryption program
             result = decrypt_program(message, password)
-        return jsonify({'result': result})
+        return render_template('result.html', result=result)
     
     elif button_clicked == 'button2':
         # Execute image encryption and decryption program
