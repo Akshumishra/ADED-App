@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ED</title>
+    <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css">
+    <script defer src="https://pyscript.net/latest/pyscript.js"></script>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="image.png" alt="">
+                <p>A&D</p>
+            </div>
+            <div class="menu">
+                <a href="index.html">Home</a>
+                <a href="#">About</a>
+                <a href="#">Explore</a>
+                <a href="#">Help</a>
+            </div>
+        </nav>
+  </header>
+    <center>
+        <br><br><br>
+        <h1>Welcome to Encryption Message Interface </h1><br>
+        <h3>Enter Message to Encrypt:</h3>
+        <textarea id="messageInput" rows="4" cols="50" placeholder="Enter your message here"></textarea><br><br>
+    
+        <!-- Section for encrypting message -->
+        <button id="encryptMessageBtn">Encrypt Message</button>
+        <p id="encryptionKeyDisplay"></p>
+        <p id="encryptedMessage"></p>
+        <py-env>
+            - micropip
+        </py-env>
+    
+        <py-script>
+            import micropip
+            import asyncio
+    
+            # Install cryptography package
+            async def setup_cryptography():
+                await micropip.install("cryptography")
+                from cryptography.fernet import Fernet
+    
+                # Global variables to store the encryption key and cipher
+                global encryption_key
+                global cipher_suite
+    
+                encryption_key = None
+                cipher_suite = None
+            
+            asyncio.ensure_future(setup_cryptography())
+    
+            # Encrypt message and display key
+            def encrypt_message(*args):
+                from cryptography.fernet import Fernet
+                global encryption_key
+                global cipher_suite
+    
+                message = Element("messageInput").element.value
+                if message:
+                    # Generate encryption key
+                    encryption_key = Fernet.generate_key()
+                    cipher_suite = Fernet(encryption_key)
+                    
+                    # Encrypt the message
+                    encrypted_message = cipher_suite.encrypt(message.encode())
+                    
+                    # Display the encryption key and encrypted message
+                    # Display the encryption key and encrypted message
+                    Element("encryptionKeyDisplay").element.innerHTML = f"Encryption Key: {encryption_key}"
+                    Element("encryptedMessage").element.innerHTML = f"Encrypted Message: {encrypted_message.decode('utf-8')}"
+                else:
+                    Element("encryptedMessage").element.innerHTML = "Please enter a message to encrypt."
+    
+            <!-- # Decrypt message with provided key and encrypted message
+            def decrypt_message(*args):
+                from cryptography.fernet import Fernet
+                encrypted_message_input = Element("encryptedMessageInput").element.value.encode()
+                entered_key = Element("securityKey").element.value.encode()
+    
+                if encrypted_message_input and entered_key:
+                    try:
+                        cipher_suite_user = Fernet(entered_key)
+                        decrypted_message = cipher_suite_user.decrypt(encrypted_message_input).decode()
+                        Element("decryptedMessage").element.innerHTML = f"Decrypted Message: {decrypted_message}"
+                    except Exception as e:
+                        Element("decryptedMessage").element.innerHTML = "Invalid key or message!"
+                else:
+                    Element("decryptedMessage").element.innerHTML = "Please provide the correct key and message."
+     -->
+            # Attach functions to button clicks
+            Element("encryptMessageBtn").element.onclick = encrypt_message
+            <!-- Element("decryptMessageBtn").element.onclick = decrypt_message -->
+    
+        </py-script>
+    </body>
+    </html>
