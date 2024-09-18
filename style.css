@@ -103,12 +103,11 @@ header{
     background-color: #f4f4f4;
     border: 1px solid #ddd;
     border-radius: 30px;
-    padding: 20px;
-    width: 54%;
+    padding: 30px;
+    width: 40%;
     color: black;
     font-size: 1.5rem;
     box-shadow: 0 2px 5px whitesmoke;
-    text-align: center;
     margin-bottom: 20px;
 }
 
