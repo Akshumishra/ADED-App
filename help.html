@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - A&D</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="image.png" alt="A&D Logo">
+                <p>A&D</p>
+            </div>
+            <div class="menu">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="index.html">Explore</a>
+                <a href="help.html">Help</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="contact-section">
+            <h1>Contact Us</h1>
+            <p>If you have any questions, suggestions, or need assistance, feel free to reach out to us by filling out the form below.</p>
+
+            <div class="contact-form">
+                <form action="submit_contact_form.php" method="POST">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" name="name" required>
+
+                    <label for="email">Your Email</label>
+                    <input type="email" id="email" name="email" required>
+
+                    <label for="subject">Subject</label>
+                    <input type="text" id="subject" name="subject" required>
+
+                    <label for="message">Your Message</label>
+                    <textarea id="message" name="message" rows="6" required></textarea>
+
+                    <button type="submit">Send Message</button>
+                </form>
+            </div>
+
+            <div class="contact-info">
+                <h3>Other Ways to Reach Us</h3>
+                <ul>
+                    <li>Email: support@andplatform.com</li>
+                    <li>Phone: +123 456 7890</li>
+                    <li>Address: 123 A&D Lane, Secure City, SC 98765</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 A&D Platform. All rights reserved.</p>
+    </footer>
+</body>
+</html>
