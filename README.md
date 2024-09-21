@@ -1,7 +1,12 @@
 **A&D - Advanced Security Solutions**
-Welcome to A&D, your trusted platform for cutting-edge security solutions tailored to protect your sensitive data, maintain privacy, and ensure secure communication. As digital threats continue to evolve, safeguarding both personal and professional information has never been more important. A&D addresses this challenge by offering a powerful suite of tools that combine strong security measures with user-friendly interfaces, making it accessible to everyone, from individuals to enterprises.
 
+DEMO LINK:- https://main--aded.netlify.app/
+
+
+Welcome to A&D, your trusted platform for cutting-edge security solutions tailored to protect your sensitive data, maintain privacy, and ensure secure communication. As digital threats continue to evolve, safeguarding both personal and professional information has never been more important. A&D addresses this challenge by offering a powerful suite of tools that combine strong security measures with user-friendly interfaces, making it accessible to everyone, from individuals to enterprises.
+____
 **Key Features**
+
 **1. Encryption Decryption App**
 The Encryption Decryption App provides end-to-end encryption for secure communication. This tool enables users to encode their messages using a unique passkey, ensuring that only the intended recipients with the correct decryption key can access the content.
 
