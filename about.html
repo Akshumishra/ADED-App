@@ -3,8 +3,206 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css">
+    <title>About A&D</title>
+   
+    
+    <style>
+            body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #1a1a1a;
+            color: #f0f0f0;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            font-size: 3rem ;
+        }
+
+        header {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #2c2c2c;
+            padding: 10px 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .logo img {
+            height: 50px;
+            border-radius: 5px;
+        }
+
+        .menu a {
+            margin: 0 15px;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 3rem;
+            transition: color 0.3s;
+        }
+
+        .menu a:hover {
+            color: #ffcc00;
+        }
+        nav {
+            background-color: rgb(13, 14, 13);
+            width: 100%;
+            height: 20vh;
+            color: rgb(226, 231, 231);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            box-shadow: 5.2px 5.2px 25.3px 5.2px white;
+            font-size: 3rem ;
+        }
+          
+        nav .logo {
+            display: flex;
+            margin-left: -145px;
+        }
+          
+        nav .logo p {
+            font-size: 4rem;
+            letter-spacing: 2px;
+            color: white;
+            padding-left: 9%;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+        }
+          
+        nav .logo img {
+            margin-top: 55px;
+            width: 110px;
+            height: 110px;
+        }
+          
+        nav .menu a {
+            text-decoration: none;
+            color: white;
+            padding: 10px 20px;
+            font-size: 3rem;
+            position: relative;
+        }
+          
+        nav .menu a:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 100%;
+            border-bottom: 2px solid indianred;
+            transition: 0.4s linear;
+        }
+          
+        nav .menu a:hover::before {
+            width: 90%;
+        }
+          
+        nav .menu a:hover {
+            color: rgb(186, 199, 75);
+        }
+          
+        main {
+            margin: 100px 100px 100px;
+            font-size: 3rem ;
+        }
+        
+       
+        h1 {
+            font-size: 3rem;
+            letter-spacing: 2px;
+            text-align: center;
+        }
+        p {
+            font-size: 2rem;
+        }
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+            font-size: 2rem;
+        }
+        li {
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+        footer {
+            width: 100%;
+            background-color: #232323;
+            padding: 40px 20px;
+            text-align: center;
+            color: #f0f0f0;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.5);
+            margin-top: auto;
+            font-size: 14px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        footer h3 {
+            margin: 20px 0;
+            font-size: 22px;
+            color: #ffcc00;
+        }
+
+        footer p {
+            max-width: 900px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        footer ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+
+        footer ul li {
+            margin: 10px 0;
+        }
+
+        footer a {
+            color: #ffcc00;
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+
+        footer a:hover {
+            color: #e6b800;
+        }
+
+        footer .social-icons {
+            margin-top: 20px;
+        }
+
+        footer .social-icons a {
+            margin: 0 10px;
+            font-size: 24px;
+        }
+
+        footer .social-icons a:hover {
+            color: #ffcc00;
+        }
+
+        .policy-container {
+            margin: 30px 0;
+            padding: 20px;
+            text-align: left;
+            background-color: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 10px;
+            max-width: 900px;
+        }
+
+        .policy-container h3 {
+            color: #ffcc00;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -16,29 +214,62 @@
             <div class="menu">
                 <a href="index.html">Home</a>
                 <a href="about.html">About</a>
-                <a href="index.html">Explore</a>
-                <a href="#">Help</a>
+                <a href="explore.html">Explore</a>
+                <a href="help.html">Help</a>
+               
             </div>
         </nav>
-  </header><br><br><br>
-    <div class="he1 service-box1">
-    <h1>About <b><i>A&D</i></b></h1>
-    
-    <p>Welcome to A&D, your trusted platform for advanced security solutions that prioritize privacy, data protection, and seamless communication. In an increasingly digital world, safeguarding your personal and professional information is more critical than ever. A&D is built to address these needs with a suite of tools designed to ensure that your sensitive data remains secure, while also providing easy-to-use applications that anyone can navigate.
+    </header><br><br><br>
 
-    <br>Our platform offers a variety of solutions, each meticulously developed to cover distinct aspects of digital security:
+    <div class="he1 service-box1">
+        <h1>About <b><i>A&D</i></b></h1>
+        <p>Welcome to A&D, your trusted platform for advanced security solutions that prioritize privacy, data protection, and seamless communication. In an increasingly digital world, safeguarding your personal and professional information is more critical than ever. A&D is built to address these needs with a suite of tools designed to ensure that your sensitive data remains secure, while also providing easy-to-use applications that anyone can navigate.</p>
+        <img src="image3.jpg" alt="Password Manager Icon" class="service-icon" width="1000" height="600" >
+        <p>Our platform offers a variety of solutions, each meticulously developed to cover distinct aspects of digital security:</p>
+        <ul><h2>Encryption Decryption Message:</h2>
+            <li><b></b> This tool provides end-to-end encryption, enabling users to encode their messages with a unique passkey, ensuring that only authorized recipients can decrypt and access the content. Whether you're sending confidential information to colleagues or private messages to friends, our app guarantees that your communication remains secure at every step.</li>
+            <h2>Data Hiding Through Image:</h2>
+            <li><b></b> Combining encryption with steganography, this feature allows you to embed secret messages within images. The entire image is encrypted, adding an extra layer of protection. This makes A&D perfect for those who need to hide sensitive information in plain sight. Whether you're sharing private data or want to protect intellectual property, our tool ensures that both the image and the hidden message are only accessible to those with the correct decryption key.</li>
+            <img src="imag2.jpg" alt="Password Manager Icon" class="service-icon" width="1000" height="600">
+            <h2>File Protector:</h2>
+            <li><b></b> A&D File Encryptor is a secure, browser-based tool designed for encrypting files with ease. It allows users to upload files, apply password-based encryption using AES-GCM, and download the encrypted file. Key security features include password-derived encryption keys, random salt, and initialization vectors (IV) to ensure strong protection. Since all processes are done locally in the browser, your data remains private and secure.</li>
+            <h2>Password Manager:</h2>
+            <li><b></b> Secure Password Manager is a user-friendly web application designed to help users generate, encrypt, and securely store their passwords for various websites. With an emphasis on security and ease of use, this tool provides strong password generation and AES encryption to safeguard your sensitive data.</li>
+        </ul>
+        <br><br>
+        <img src="img.webp" alt="Password Manager Icon" class="service-icon" width="1000" height="600">
+        <p>At A&D, we are committed to bridging the gap between advanced security and user-friendly design. We believe that privacy and protection shouldn't come at the cost of convenience. Our goal is to provide you with a comprehensive suite of security tools that anyone—regardless of technical skill—can use with confidence.</p>
+
+        <p>Join us on this journey toward a more secure digital future. Whether you’re an individual looking to protect personal information, or a business in need of robust communication tools, A&D has the solution you need. We are here to help you stay safe in the digital age, one secure interaction at a time.</p>
+    </div>
+</body>
+</html>
+<footer>
+    <p>&copy; 2024 A&D. All Rights Reserved.</p>
+    <h3>Terms of Service</h3>
+   
     <ul>
-    <li><b>Encryption Decryption App:</b> This tool provides end-to-end encryption, enabling users to encode their messages with a unique passkey, ensuring that only authorized recipients can decrypt and access the content. Whether you're sending confidential information to colleagues or private messages to friends, our app guarantees that your communication remains secure at every step.
-    </li><li>
-    <b>Data Hiding Through Image:</b> Combining encryption with steganography, this feature allows you to embed secret messages within images. The entire image is encrypted, adding an extra layer of protection. This makes A&D perfect for those who need to hide sensitive information in plain sight. Whether you're sharing private data or want to protect intellectual property, our tool ensures that both the image and the hidden message are only accessible to those with the correct decryption key.
-    </li><li>
-    <b>File Transfer App:</b> Sharing files across devices has never been more secure. With our file transfer tool, you can send documents, images, and other media quickly and safely, thanks to end-to-end encryption. For added protection, you can assign a password to your file transfers, ensuring that only intended recipients can access your files. Real-time transfer tracking, cross-platform compatibility, and the option for wireless sharing through QR codes make this tool both practical and secure.
-    </li><li>
-    <b>Password Manager:</b> Managing dozens of online accounts and passwords can be overwhelming, which is why A&D offers a comprehensive password manager. Our tool not only stores and organizes your passwords securely, but also encrypts them using a master key that only you can access. With features like automatic form filling, password generation, and cross-device synchronization, you’ll never have to worry about remembering multiple passwords again. This provides you with the convenience of managing your credentials while ensuring the utmost protection against unauthorized access.
-    </li></ul>
-    At A&D, we are committed to bridging the gap between advanced security and user-friendly design. We believe that privacy and protection shouldn't come at the cost of convenience. Our goal is to provide you with a comprehensive suite of security tools that anyone—regardless of technical skill—can use with confidence.
-    
-    Join us on this journey toward a more secure digital future. Whether you’re an individual looking to protect personal information, or a business in need of robust communication tools, A&D has the solution you need. We are here to help you stay safe in the digital age, one secure interaction at a time.
-</p></div>
+        <li><strong>Service Use:</strong> You are responsible for your use of the services provided by A&D and agree not to misuse them.</li>
+        <li><strong>Modification of Terms:</strong> A&D reserves the right to modify these terms at any time, and it is your responsibility to review them periodically.</li>
+        
+    </ul>
+    <h3>Privacy Policy</h3>
+   
+    <ul>
+        <li><strong>Information Collection:</strong> We collect personal information that you voluntarily provide when using our services (e.g., name, email address).</li>
+        <li><strong>Use of Information:</strong> We use the information collected to provide and improve our services, ensure security, and communicate with you.</li>
+    </ul>
+
+    <div class="social-icons">
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+    </div>
+
+    <p>
+        <a href="#terms">Terms of Service</a> | 
+        <a href="#privacy">Privacy Policy</a>
+    </p>
+</footer>
 </body>
 </html>
