@@ -1,216 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>A&D</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
-
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Poppins', sans-serif;
-      background-image: url("../image/bg.jpg");
-      background-repeat: no-repeat;
-      background-size: cover;
-      background-position: center;
-      color: #f0f0f0;
-      display: flex;
-      flex-direction: column;
-    }
-
-    header {
-      background-color: #1a1a1a;
-      box-shadow: 0 4px 12px rgba(248, 247, 247, 0.6);
-      height: 15vh;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
-
-    nav {
-      max-width: 1200px;
-      margin: auto;
-      /*padding: 3rem 2rem;*/
-      display: flex;
-      justify-content: space-between;
-    }
-
-    .logo {
-      display: flex;
-      margin-left: -350px;
-      padding-top: 25px;
-      gap: 15px;
-    }
-
-    .logo img {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-    }
-
-    .logo p {
-      font-size: 3rem;
-      font-weight: 900;
-      color: whitesmoke;
-      letter-spacing: 2.5px;
-    }
-
-    .menu a {
-      color: #ffffff;
-      text-decoration: none;
-      font-size: 1.2rem;
-      margin: 0 15px;
-      position: relative;
-      transition: color 0.3s ease;
-    }
-
-    .menu a::after {
-      content: '';
-      position: absolute;
-      bottom: -5px;
-      left: 0;
-      width: 0%;
-      height: 2px;
-      background: black;
-      transition: 0.4s ease;
-    }
-
-    .menu a:hover {
-      color: #ffcc00;
-    }
-
-    .menu a:hover::after {
-      width: 100%;
-    }
-
-    main {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 60px 20px;
-      text-align: center;
-    }
-
-    main h1 {
-      font-size: 3rem;
-      color: #ffffff;
-      max-width: 900px;
-      line-height: 1.5;
-      background: linear-gradient(to right, white, whitesmoke);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .Box {
-      margin-top: 40px;
-    }
-
-    footer {
-      background-color: #121212;
-      text-align: center;
-      padding: 30px 20px;
-      color: #ccc;
-      font-size: 0.9rem;
-    }
-
-    footer h3 {
-      color: whitesmoke;
-      margin-bottom: 15px;
-    }
-
-    footer a {
-      color: whitesmoke;
-      text-decoration: none;
-      margin: 0 10px;
-    }
-
-    .boxx {
-  width: 80%;
-  max-width: 700px;
-  padding: 40px;
-  margin: 50px auto;
-  background: rgba(255, 255, 255, 0.05); /* Transparent */
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 15px;
-  color: white;
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ADED - Landing Page</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+<style>
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #121212;
+  color: #fff;
   text-align: center;
-  font-size: 1.2rem;
-  box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-
-.boxx:hover {
-  transform: scale(1.02);
-  box-shadow: 0 0 40px rgba(255, 255, 255, 0.4);
+.container {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  padding: 40px;
+  max-width: 90%;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.5);
 }
-
-
-    footer a:hover {
-      color: whitesmoke;
-    }
-
-    @media (max-width: 768px) {
-      nav {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .menu {
-        margin-top: 100px;
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        width: 100%;
-      }
-
-      .menu a {
-        margin-top: 100px;
-        letter-spacing: 3px;
-        margin: 0;
-      }
-
-      main h1 {
-        font-size: 3rem;
-      }
-    }
-  </style>
+@media screen and (min-width: 1200px) {
+  .container {
+    padding: 70px;
+  }
+}
+.logo {
+  font-size: 108px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.logo img {
+  width: 300px;
+  height: auto;
+  margin-bottom: 10px;
+}
+.tagline {
+  font-size: 30px;
+  margin-bottom: 30px;
+  color: #ccc;
+}
+.get-started-btn {
+  background-color: #1f1f1f;
+  color: #fff;
+  border: 2px solid #333;
+  padding: 12px 25px;
+  font-size: 30px;
+  font-weight: 600;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.3s;
+}
+.get-started-btn:hover {
+  background-color: #333;
+  transform: translateY(-2px);
+}
+.footer {
+  position: relative;
+  margin-top: 20px;
+  font-size: 12px;
+  color: #888;
+}
+</style>
 </head>
 <body>
-
-  <header>
-    <nav>
-      <div class="logo">
-        <img src="../image/image.png" alt="Logo">
-        <p>A&D</p>
-      </div>
-      <div class="menu" style="padding-top: 60px; margin-right: -250px;">
-        <a href=""><b>Login</b></a>
-        <a href="../Register/register.html"><b>Register Now</b></a>
-      </div>
-    </nav>
-  </header>
-
-  <main>
-    <div class="boxx">
-      <h1>Welcome to A&D:</h1><h2>Your Secure Solutions for Encryption, Data Protection, and More!</h2>
-    </div>
-  </main>
-
-  <footer>
-    <h3>A&D Security Platform</h3>
-    <p>Providing robust encryption and data protection tools to keep your information safe and secure. Your privacy is our priority.</p>
-    <div>
-      <a href="#">Privacy Policy</a> | <a href="#">Terms of Use</a>
-    </div>
-  </footer>
-
+<div class="container">
+  <div class="logo">
+    <img src="/image/logo.png" alt="ADED Logo">
+    ADED
+  </div>
+  <div class="tagline">Your All-in-One Encryption and Data Security App</div>
+  <button class="get-started-btn" onclick="window.location.href='/Register/register.html'">Get Started</button>
+  <div class="footer">© 2025 ADED | All rights reserved</div>
+</div>
 </body>
 </html>
