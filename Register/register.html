@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration Form</title>
+    <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
+    <script defer src="https://pyscript.net/latest/pyscript.js"></script>
     <style>
         body{
             padding: 0;
@@ -267,5 +269,43 @@
              Copyright  &copy; HealthyMunch Pvt Ltd 2024 All Rights Reserved
          </p>
     </div></footer>
+<py-script>
+from js import document, console, fetch
+import asyncio
+
+# Handle register button click
+def register(event):
+    # Get form values
+    name = document.getElementById("fullName").value
+    dob = document.getElementById("dob").value
+    gender = document.getElementById("gender").value
+    email = document.getElementById("email").value
+    password = document.getElementById("password").value
+
+    console.log(f"Registering: {name}, {dob}, {gender}, {email}")
+
+    # Call Python backend API
+    asyncio.ensure_future(send_data(name, dob, gender, email, password))
+
+async def send_data(name, dob, gender, email, password):
+    payload = {
+        "name": name,
+        "dob": dob,
+        "gender": gender,
+        "email": email,
+        "password": password
+    }
+    # Replace with your backend API URL
+    response = await fetch(
+        "http://localhost:5000/register",
+        method="POST",
+        headers={"Content-Type": "application/json"},
+        body=JSON.stringify(payload)
+    )
+    console.log(await response.text())
+
+# Attach handler to button
+document.getElementById("registerBtn").addEventListener("click", register)
+</py-script>
 </body>
 </html>
