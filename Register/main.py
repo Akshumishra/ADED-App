@@ -1,15 +1,14 @@
-import bcrypt
-from fastapi import FastAPI, HTTPException, Form
+from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from pymongo import MongoClient
-from urllib.parse import quote_plus
 from pydantic import BaseModel, EmailStr
 from passlib.context import CryptContext
+from pymongo import MongoClient
+from urllib.parse import quote_plus
 from datetime import datetime
 
 app = FastAPI()
 
-# Enable CORS for local frontend testing
+# CORS for frontend compatibility
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -18,18 +17,18 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Password hashing context
+# Password hashing
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 # MongoDB connection
-password = quote_plus("Akshita_9204")  # your MongoDB password
+password = quote_plus("Akshita_9204")
 client = MongoClient(f"mongodb+srv://akshitamishra421:{password}@cluster0.3crbjxf.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 db = client["aded_database"]
-collection = db["users"]
-contact_collection = db["contact_messages"]
-history_collection = db["history"]
+users_col = db["users"]
+contact_col = db["contact_messages"]
+history_col = db["history"]
 
-# Models for request validation
+# Pydantic models
 class User(BaseModel):
     fullName: str
     DOB: str
@@ -47,89 +46,73 @@ class ContactMessage(BaseModel):
     subject: str
     message: str
 
-# Utility to log user activity
-def log_user_activity(email, activity):
-    history_collection.insert_one({
+# Utility: log user activity
+def log_user_activity(email: str, activity: str):
+    history_col.insert_one({
         "email": email,
         "activity": activity,
-        "timestamp": datetime.now()
+        "timestamp": datetime.utcnow()
     })
 
 # Routes
 @app.get("/")
-def read_root():
-    return {"message": "ADED App FastAPI is working!"}
-
-@app.post("/log_activity")
-async def log_activity(
-    user_email: str = Form(...),
-    activity: str = Form(...)
-):
-    log_user_activity(user_email, activity)
-    return {"message": "Activity logged"}
-
+def home():
+    return {"message": "ADED FastAPI backend working!"}
 
 @app.post("/register")
-async def register(
-    email: str = Form(...),
-    password: str = Form(...),
-    fullName: str = Form(...),
-    DOB: str = Form(...),
-    gender: str = Form(...),
-    role: str = Form("user")  # Default to user
-):
-    if collection.find_one({"email": email}):
+async def register(user: User):
+    if users_col.find_one({"email": user.email}):
         raise HTTPException(status_code=400, detail="Email already registered")
     
-    hashed_password = pwd_context.hash(password)
-    user_data = {
-        "email": email,
-        "password": hashed_password,
-        "role": role,
-        "fullName": fullName,
-        "DOB": DOB,
-        "gender": gender
-    }
-    collection.insert_one(user_data)
-    log_user_activity(email, "User registered")
+    hashed_password = pwd_context.hash(user.password)
+    user_data = user.dict()
+    user_data["password"] = hashed_password
+    user_data["role"] = "user"
+    users_col.insert_one(user_data)
+    log_user_activity(user.email, "User registered")
     return {"message": "User registered successfully!"}
 
 @app.post("/login")
-async def login_user(user: UserLogin):
-    user_in_db = collection.find_one({"email": user.email})
-    if not user_in_db:
-        raise HTTPException(status_code=401, detail="Invalid email or password")
-    if not pwd_context.verify(user.password, user_in_db["password"]):
+async def login(user: UserLogin):
+    user_in_db = users_col.find_one({"email": user.email})
+    if not user_in_db or not pwd_context.verify(user.password, user_in_db["password"]):
         raise HTTPException(status_code=401, detail="Invalid email or password")
     log_user_activity(user.email, "User logged in")
-    return {"message": "Login successful", "user_id": str(user_in_db["_id"]), "fullName": user_in_db["fullName"]}
+    return {
+        "message": "Login successful",
+        "user_id": str(user_in_db["_id"]),
+        "fullName": user_in_db["fullName"]
+    }
 
 @app.post("/contact")
-async def submit_contact(contact: ContactMessage):
-    try:
-        result = contact_collection.insert_one(contact.dict())
-        log_user_activity(contact.email, "Submitted help form")
-        return {"message": "Message received successfully!", "id": str(result.inserted_id)}
-    except Exception as e:
-        print("CONTACT ERROR:", e)
-        raise HTTPException(status_code=500, detail="Failed to submit message")
+async def submit_contact(message: ContactMessage):
+    result = contact_col.insert_one(message.dict())
+    log_user_activity(message.email, "Submitted help form")
+    return {"message": "Message received successfully!", "id": str(result.inserted_id)}
+
+@app.post("/log_activity")
+async def log_activity(user_email: EmailStr, activity: str):
+    log_user_activity(user_email, activity)
+    return {"message": "Activity logged successfully."}
 
 @app.post("/admin/view_user_activity")
 async def view_user_activity(
     admin_email: str = Form(...),
     admin_password: str = Form(...)
 ):
-    admin = collection.find_one({"email": admin_email})
+    admin = users_col.find_one({"email": admin_email})
     if not admin or not pwd_context.verify(admin_password, admin["password"]):
         raise HTTPException(status_code=401, detail="Invalid admin credentials")
     if admin.get("role") != "admin":
         raise HTTPException(status_code=403, detail="Access forbidden. Admins only.")
 
-    activities = list(history_collection.find().sort("timestamp", -1))
+    activities = list(history_col.find().sort("timestamp", -1))
     for act in activities:
         act["_id"] = str(act["_id"])
         act["timestamp"] = act["timestamp"].strftime("%Y-%m-%d %H:%M:%S")
     return {"activities": activities}
+
+
 
 if __name__ == "__main__":
     import uvicorn
