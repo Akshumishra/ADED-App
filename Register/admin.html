@@ -55,6 +55,10 @@
         #admin-login-form button:hover {
             background: #0b5ed7;
         }
+        #admin-login-form button:disabled {
+            background: #666;
+            cursor: not-allowed;
+        }
         table {
             margin: 20px auto;
             border-collapse: collapse;
@@ -71,20 +75,41 @@
         tr:nth-child(even) {
             background-color: #111;
         }
+        .loading {
+            color: #0d6efd;
+            margin: 20px;
+        }
+        .error-message {
+            color: #ff4444;
+            background: #330000;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 20px auto;
+            max-width: 500px;
+        }
+        .success-message {
+            color: #44ff44;
+            background: #003300;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 20px auto;
+            max-width: 500px;
+        }
     </style>
 </head>
 <body>
     <header>
         <img src="../image/bg.png" alt="ADED Logo">
-        <h1>ADED</h1>
+        <h1>ADED - Admin Panel</h1>
     </header>
 
     <form id="admin-login-form">
         <input type="email" id="adminEmail" placeholder="Admin Email" required>
         <input type="password" id="adminPassword" placeholder="Admin Password" required>
-        <button type="submit">View User Activity</button>
+        <button type="submit" id="loginBtn">View User Activity</button>
     </form>
 
+    <div id="message-container"></div>
     <div id="activity-container"></div>
 
     <script>
@@ -93,34 +118,78 @@
 
         const adminEmail = document.getElementById("adminEmail").value.trim();
         const adminPassword = document.getElementById("adminPassword").value.trim();
+        const loginBtn = document.getElementById("loginBtn");
+        const messageContainer = document.getElementById("message-container");
+        const activityContainer = document.getElementById("activity-container");
+
+        // Clear previous messages and activities
+        messageContainer.innerHTML = "";
+        activityContainer.innerHTML = "";
+
+        // Validation
+        if (!adminEmail || !adminPassword) {
+            showMessage("Please enter both email and password.", "error");
+            return;
+        }
+
+        // Show loading state
+        loginBtn.disabled = true;
+        loginBtn.textContent = "Loading...";
+        showMessage("Authenticating...", "loading");
 
         const formData = new FormData();
         formData.append("admin_email", adminEmail);
         formData.append("admin_password", adminPassword);
 
         try {
+            console.log("Sending request to server...");
+            
             const response = await fetch("http://127.0.0.1:8000/admin/view_user_activity", {
                 method: "POST",
                 body: formData
             });
 
+            console.log("Response status:", response.status);
+            
             const data = await response.json();
+            console.log("Response data:", data);
 
             if (response.ok && data.activities) {
+                showMessage(`Successfully loaded ${data.activities.length} activities.`, "success");
                 document.getElementById("activity-container").innerHTML = generateTable(data.activities);
+                
+                // Hide the login form after successful login
+                document.getElementById("admin-login-form").style.display = "none";
             } else {
-                alert("❌ Access denied: " + (data.detail || "Check credentials or role."));
-                console.log("Error response:", data);
+                const errorMsg = data.detail || data.message || "Unknown error occurred";
+                showMessage("❌ Access denied: " + errorMsg, "error");
+                console.error("Error response:", data);
             }
 
         } catch (error) {
             console.error("Fetch error:", error);
-            alert("❌ Error connecting to server: " + error);
+            showMessage("❌ Error connecting to server. Make sure the server is running on http://127.0.0.1:8000", "error");
+        } finally {
+            // Reset button state
+            loginBtn.disabled = false;
+            loginBtn.textContent = "View User Activity";
         }
     });
 
+    function showMessage(message, type) {
+        const messageContainer = document.getElementById("message-container");
+        const className = type === "error" ? "error-message" : 
+                         type === "success" ? "success-message" : "loading";
+        messageContainer.innerHTML = `<div class="${className}">${message}</div>`;
+    }
+
     function generateTable(activities) {
+        if (!activities || activities.length === 0) {
+            return '<div class="error-message">No activities found.</div>';
+        }
+
         let html = `
+            <h2>User Activities (${activities.length} total)</h2>
             <table>
                 <tr>
                     <th>Email</th>
@@ -128,17 +197,26 @@
                     <th>Timestamp</th>
                 </tr>
         `;
+        
         activities.forEach(act => {
             html += `
                 <tr>
-                    <td>${act.email}</td>
-                    <td>${act.activity}</td>
-                    <td>${act.timestamp}</td>
+                    <td>${escapeHtml(act.email || 'N/A')}</td>
+                    <td>${escapeHtml(act.activity || 'N/A')}</td>
+                    <td>${escapeHtml(act.timestamp || 'N/A')}</td>
                 </tr>
             `;
         });
+        
         html += `</table>`;
         return html;
+    }
+
+    // Utility function to escape HTML to prevent XSS
+    function escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
     }
     </script>
 </body>

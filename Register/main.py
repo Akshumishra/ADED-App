@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Form
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, EmailStr
 from passlib.context import CryptContext
@@ -63,7 +63,7 @@ def home():
 async def register(user: User):
     if users_col.find_one({"email": user.email}):
         raise HTTPException(status_code=400, detail="Email already registered")
-    
+        
     hashed_password = pwd_context.hash(user.password)
     user_data = user.dict()
     user_data["password"] = hashed_password
@@ -95,24 +95,37 @@ async def log_activity(user_email: EmailStr, activity: str):
     log_user_activity(user_email, activity)
     return {"message": "Activity logged successfully."}
 
+# FIXED: Use Form parameters instead of function parameters
 @app.post("/admin/view_user_activity")
 async def view_user_activity(
-    admin_email: str = Form(...),
+    admin_email: EmailStr = Form(...),
     admin_password: str = Form(...)
 ):
-    admin = users_col.find_one({"email": admin_email})
-    if not admin or not pwd_context.verify(admin_password, admin["password"]):
-        raise HTTPException(status_code=401, detail="Invalid admin credentials")
-    if admin.get("role") != "admin":
-        raise HTTPException(status_code=403, detail="Access forbidden. Admins only.")
-
-    activities = list(history_col.find().sort("timestamp", -1))
-    for act in activities:
-        act["_id"] = str(act["_id"])
-        act["timestamp"] = act["timestamp"].strftime("%Y-%m-%d %H:%M:%S")
-    return {"activities": activities}
-
-
+    try:
+        admin = users_col.find_one({"email": admin_email})
+        
+        if not admin:
+            raise HTTPException(status_code=401, detail="Admin not found")
+            
+        if not pwd_context.verify(admin_password, admin["password"]):
+            raise HTTPException(status_code=401, detail="Invalid password")
+            
+        if admin.get("role") != "admin":
+            raise HTTPException(status_code=403, detail="Access forbidden: Admins only")
+        
+        # Log admin activity
+        log_user_activity(admin_email, "Admin viewed user activities")
+        
+        activities = list(history_col.find().sort("timestamp", -1))
+        for act in activities:
+            act["_id"] = str(act["_id"])
+            act["timestamp"] = act["timestamp"].strftime("%Y-%m-%d %H:%M:%S")
+        
+        return {"activities": activities}
+        
+    except Exception as e:
+        print(f"Error in admin endpoint: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Server error: {str(e)}")
 
 if __name__ == "__main__":
     import uvicorn
