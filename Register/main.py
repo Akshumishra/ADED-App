@@ -5,9 +5,20 @@ from passlib.context import CryptContext
 from pymongo import MongoClient
 from urllib.parse import quote_plus
 from datetime import datetime
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 
 app = FastAPI()
+
+# Serve static files (CSS, JS, images)
 app.mount("/static", StaticFiles(directory="Register/static"), name="static")
+
+# Serve index.html on root
+@app.get("/")
+async def serve_index():
+    return FileResponse("Register/static/index.html")
+
+
 # CORS for frontend compatibility
 app.add_middleware(
     CORSMiddleware,
