@@ -3,11 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>File Decryptor</title>
+    <title>File Decryptor - A&D</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 20px;
+            background-color: #000;
+            color: aliceblue;
         }
         .container {
             max-width: 500px;
@@ -15,221 +17,188 @@
             padding: 20px;
             border: 1px solid #ccc;
             border-radius: 10px;
+            background-color: #111;
         }
-        input[type="file"], input[type="password"] {
-            display: block;
-            margin-bottom: 20px;
+        input[type="file"], input[type="password"], button {
+            width: 90%;
+            padding: 15px;
+            font-size: 1.2em;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: none;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
         }
         #downloadLink {
             display: none;
             margin-top: 20px;
+            color: #ffcc00;
         }
-
-    body{
-            background-color: #000000;
-            color: aliceblue;
-        }
-        header {
-            display: flex;
-          }
-          
-          nav {
-            background-color: rgb(13, 14, 13);
+        nav {
+            background-color: #0d0e0d;
             width: 100%;
-            height: 20vh;
-            color: rgb(226, 231, 231);
+            color: #e2e7e7;
             display: flex;
             justify-content: space-around;
             align-items: center;
-            box-shadow: 5.2px 5.2px 25.3px 5.2px white;
-          }
-          
-          nav .logo {
+            padding: 10px 0;
+            box-shadow: 0 0 10px white;
+        }
+        nav .logo {
             display: flex;
-            margin-left: -145px;
-          }
-          
-          nav .logo p {
-            font-size: 4rem;
-            letter-spacing: 2px;
-            color: white;
-            padding-left: 9%;
+            align-items: center;
+        }
+        nav .logo img {
+            width: 60px;
+            height: 60px;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+        nav .logo p {
+            font-size: 2rem;
             font-family: Georgia, 'Times New Roman', Times, serif;
-          }
-          
-          nav .logo img {
-            margin-top: 55px;
-            width: 110px;
-            height: 110px;
-          }
-          
-          nav .menu a {
+            color: white;
+        }
+        nav .menu a {
             text-decoration: none;
             color: white;
             padding: 10px 20px;
-            font-size: 3em;
+            font-size: 1.2em;
             position: relative;
-          }
-          
-          nav .menu a:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 0%;
-            height: 100%;
-            border-bottom: 2px solid indianred;
-            transition: 0.4s linear;
-          }
-          
-          nav .menu a:hover::before {
-            width: 90%;
-          }
-          
-          nav .menu a:hover {
+        }
+        nav .menu a:hover {
             color: rgb(186, 199, 75);
-          }
-          
-          main {
-            margin: 100px 100px 100px;
-          }
-          h1{
-            font-size: 3rem;
-            letter-spacing: 2px;
-          }
-          .he{
-            margin-left: 300px;
-          }
-          .form-box {
-            width: 60%; /* Adjust as needed */
-            margin: 0 auto; /* Center the box */
-            padding: 20px;
-            border: 2px solid #ccc; /* Border around the box */
-            border-radius: 10px; /* Rounded corners */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow for effect */
-            background-color: #f9f9f9; /* Light background color */
-            color:black;
         }
-
-        input[type="text"], input[type="email"], textarea {
-            width: 100%; /* Adjusted width */
-            padding: 10px;
-            font-size: 2em;
-            margin-bottom: 15px;
-        }
-
-        textarea {
-            height: 150px;
-        }
-
-        button {
-            font-size: 2em;
-            padding: 10px 20px;
-            background-color: #4CAF50;
-            color: rgb(225, 212, 212);
-            border: none;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #45a049; /* Button hover effect */
-        }
-        input[type="file"], input[type="password"] {
-            width: 90%;
-            padding: 15px;
-            font-size: 2em;
-            margin-bottom: 20px;
-            border: 2px solid #ccc;
-            border-radius: 5px;
-        }
-
-        #downloadLink {
-            display: none;
-            margin-top: 20px;
-            color:white;
+        h1 {
+            text-align: center;
+            font-size: 2rem;
+            margin: 20px 0;
         }
     </style>
 </head>
 <body>
-    <header>
-        <nav>
-            <div class="logo">
-                <img src="../image/bg.png" alt="">
-                <p>A&D</p>
-            </div>
-            <div class="menu">
-                <a href="index1.html">Home</a>
-                <a href="about.html">About</a>
-                <a href="explore.html">Explore</a>
-                <a href="../Register/help.html">Help</a>
-            </div>
-        </nav>
-  </header><br>
-    <div class="container">
-        <h1>Decrypt File</h1>
-        <input type="file" id="fileInput" />
-        <input type="password" id="passwordInput" placeholder="Enter Decryption Key" />
-        <button id="decryptButton">Decrypt and Download</button>
-        <a id="downloadLink" download>Download Decrypted File</a>
+
+<nav>
+    <div class="logo">
+        <img src="../image/bg.png" alt="Logo">
+        <p>A&D</p>
     </div>
+    <div class="menu">
+        <a href="index1.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="explore.html">Explore</a>
+        <a href="../Register/help.html">Help</a>
+    </div>
+</nav>
 
-    <script>
-        async function decryptFile(file, password) {
-            const encoder = new TextEncoder();
-            const keyMaterial = await window.crypto.subtle.importKey(
-                'raw',
-                encoder.encode(password),
-                'PBKDF2',
-                false,
-                ['deriveBits', 'deriveKey']
-            );
+<div class="container">
+    <h1>Decrypt File</h1>
+    <input type="file" id="fileInput" />
+    <input type="password" id="passwordInput" placeholder="Enter Decryption Key" />
+    <button id="decryptButton">Decrypt and Download</button>
+    <a id="downloadLink" download>Download Decrypted File</a>
+</div>
 
-            const arrayBuffer = await file.arrayBuffer();
-            const salt = new Uint8Array(arrayBuffer.slice(0, 16));
-            const iv = new Uint8Array(arrayBuffer.slice(16, 28));
-            const encryptedData = new Uint8Array(arrayBuffer.slice(28));
+<script>
+async function decryptFile(file, password) {
+    const encoder = new TextEncoder();
+    const keyMaterial = await window.crypto.subtle.importKey(
+        'raw',
+        encoder.encode(password),
+        'PBKDF2',
+        false,
+        ['deriveBits', 'deriveKey']
+    );
 
-            const key = await window.crypto.subtle.deriveKey(
-                {
-                    name: 'PBKDF2',
-                    salt: salt,
-                    iterations: 100000,
-                    hash: 'SHA-256'
-                },
-                keyMaterial,
-                { name: 'AES-GCM', length: 256 },
-                false,
-                ['decrypt']
-            );
+    const arrayBuffer = await file.arrayBuffer();
+    const salt = new Uint8Array(arrayBuffer.slice(0, 16));
+    const iv = new Uint8Array(arrayBuffer.slice(16, 28));
+    const encryptedData = new Uint8Array(arrayBuffer.slice(28));
 
-            const decryptedData = await window.crypto.subtle.decrypt(
-                { name: 'AES-GCM', iv: iv },
-                key,
-                encryptedData
-            );
+    const key = await window.crypto.subtle.deriveKey(
+        {
+            name: 'PBKDF2',
+            salt: salt,
+            iterations: 100000,
+            hash: 'SHA-256'
+        },
+        keyMaterial,
+        { name: 'AES-GCM', length: 256 },
+        false,
+        ['decrypt']
+    );
 
-            return new Uint8Array(decryptedData);
-        }
+    const decryptedData = await window.crypto.subtle.decrypt(
+        { name: 'AES-GCM', iv: iv },
+        key,
+        encryptedData
+    );
 
-        document.getElementById("decryptButton").addEventListener("click", async () => {
-            const fileInput = document.getElementById("fileInput");
-            const password = document.getElementById("passwordInput").value;
+    return new Uint8Array(decryptedData);
+}
 
-            if (fileInput.files.length === 0 || password === "") {
-                alert("Please select a file and enter a password!");
-                return;
-            }
+async function logDecryptionActivity(fileName) {
+    const userEmail = localStorage.getItem("user_email") || localStorage.getItem("email");
+    if (!userEmail) {
+        console.error("User email not found in localStorage; cannot log activity.");
+        return;
+    }
 
-            const file = fileInput.files[0];
-            const decryptedData = await decryptFile(file, password);
-            const blob = new Blob([decryptedData], { type: 'application/octet-stream' });
+    try {
+        const formData = new FormData();
+        formData.append("user_email", userEmail);
+        formData.append("activity", `Decrypted file: ${fileName}`);
 
-            const downloadLink = document.getElementById('downloadLink');
-            downloadLink.href = URL.createObjectURL(blob);
-            downloadLink.download = `decrypted_${file.name}`;
-            downloadLink.style.display = 'block';
-            downloadLink.innerText = `Download Decrypted File (${file.name})`;
+        const response = await fetch("http://127.0.0.1:8000/log_activity", {
+            method: "POST",
+            body: formData
         });
-    </script>
+
+        if (response.ok) {
+            console.log("✅ Decryption activity logged successfully.");
+        } else {
+            console.error("❌ Failed to log decryption activity. Status:", response.status);
+            const errorText = await response.text();
+            console.error("Response:", errorText);
+        }
+    } catch (error) {
+        console.error("❌ Error logging decryption activity:", error);
+    }
+}
+
+document.getElementById("decryptButton").addEventListener("click", async () => {
+    const fileInput = document.getElementById("fileInput");
+    const password = document.getElementById("passwordInput").value;
+
+    if (fileInput.files.length === 0 || password === "") {
+        alert("Please select a file and enter a password!");
+        return;
+    }
+
+    const file = fileInput.files[0];
+    try {
+        const decryptedData = await decryptFile(file, password);
+        const blob = new Blob([decryptedData], { type: 'application/octet-stream' });
+
+        const downloadLink = document.getElementById('downloadLink');
+        downloadLink.href = URL.createObjectURL(blob);
+        downloadLink.download = `decrypted_${file.name}`;
+        downloadLink.style.display = 'block';
+        downloadLink.textContent = `Download Decrypted File (${file.name})`;
+
+        await logDecryptionActivity(file.name);
+    } catch (error) {
+        console.error("❌ Error during decryption:", error);
+        alert("Decryption failed. Please check your password and file.");
+    }
+});
+</script>
+
 </body>
 </html>

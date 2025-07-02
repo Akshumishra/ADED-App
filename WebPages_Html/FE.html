@@ -1,439 +1,211 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>File Encryptor</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            background-color: #000000;
-            color: aliceblue;
-        }
-        .container {
-            max-width: 500px;
-            margin: auto;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 10px;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Encrypt File - A&D</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #1a1a1a;
+      color: #f0f0f0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 15px;
+    }
 
-        /* Increase size of text boxes */
-        input[type="file"], input[type="password"] {
-            width: 90%;
-            padding: 15px;
-            font-size: 2em;
-            margin-bottom: 20px;
-            border: 2px solid #ccc;
-            border-radius: 5px;
-        }
+    nav {
+      background-color: #0d0e0d;
+      width: 100%;
+      color: #e2e7e7;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+    }
 
-        #downloadLink {
-            display: none;
-            margin-top: 20px;
-            color:white;
-        }
+    .logo {
+      display: flex;
+      align-items: center;
+    }
 
-         body {
-            margin: 0;
-            font-family: 'Arial', sans-serif;
-            background-color: #1a1a1a;
-            color: #f0f0f0;
-            line-height: 1.6;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px;
-            
-        }
+    .logo img {
+      width: 50px;
+      height: 50px;
+      border-radius: 5px;
+      margin-right: 10px;
+    }
 
-        header {
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: #2c2c2c;
-            padding: 10px 20px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-        }
+    .logo p {
+      font-size: 1.5rem;
+      color: white;
+    }
 
-        .logo img {
-            height: 50px;
-            border-radius: 5px;
-        }
+    .menu a {
+      text-decoration: none;
+      color: white;
+      padding: 8px 15px;
+      font-size: 1rem;
+      position: relative;
+    }
 
-        .menu a {
-            margin: 0 15px;
-            color: #ffffff;
-            text-decoration: none;
-            font-size: 3rem;
-            transition: color 0.3s;
-        }
+    h1 {
+      font-size: 1.5rem;
+      text-align: center;
+      margin: 20px 10px;
+    }
 
-        .menu a:hover {
-            color: #ffcc00;
-        }
+    .container {
+      background-color: #222;
+      border-radius: 10px;
+      padding: 20px;
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+    }
 
-        .services {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 80%;
-            margin-top: 20px;
-        }
+    input[type="file"],
+    input[type="password"],
+    button {
+      width: 90%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: none;
+      outline: none;
+      font-size: 1rem;
+    }
 
-        .service-box {
-            position: relative;
-            background-color: #333;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-            overflow: hidden;
-            margin-bottom: 20px;
-            width: 100%;
-            transition: transform 0.3s, box-shadow 0.3s;
-            max-width: 1000px;
-            min-width: 300px;
-            font-size: 3rem ;
-        }
+    button {
+      background-color: #007BFF;
+      color: white;
+      cursor: pointer;
+    }
 
-        .service-box:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
-        }
+    button:hover {
+      background-color: #0056b3;
+    }
 
-        .service-icon {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            transition: transform 0.3s;
-        }
-
-        .service-box:hover .service-icon {
-            transform: scale(1.1);
-        }
-
-        .service-info {
-            padding: 20px;
-            text-align: center;
-        }
-
-        .service-info h3 {
-            margin: 10px 0;
-            font-size: 3rem;
-            color: #ffcc00;
-        }
-
-        .service-info a {
-            display: inline-block;
-            margin-top: 10px;
-            padding: 10px 15px;
-            background-color: #ffcc00;
-            color: #000;
-            border-radius: 5px;
-            text-decoration: none;
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        .service-info a:hover {
-            background-color: #e6b800;
-            color: #fff;
-        }
-
-        footer {
-            width: 100%;
-            background-color: #232323;
-            padding: 40px 20px;
-            text-align: center;
-            color: #f0f0f0;
-            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.5);
-            margin-top: auto;
-            font-size: 14px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        footer h3 {
-            margin: 20px 0;
-            font-size: 22px;
-            color: #ffcc00;
-        }
-
-        footer p {
-            max-width: 900px;
-            line-height: 1.8;
-            margin-bottom: 20px;
-            text-align: justify;
-        }
-
-        footer ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 20px 0;
-        }
-
-        footer ul li {
-            margin: 10px 0;
-        }
-
-        footer a {
-            color: #ffcc00;
-            text-decoration: none;
-            margin: 0 10px;
-            font-size: 16px;
-            transition: color 0.3s;
-        }
-
-        footer a:hover {
-            color: #e6b800;
-        }
-
-        footer .social-icons {
-            margin-top: 20px;
-        }
-
-        footer .social-icons a {
-            margin: 0 10px;
-            font-size: 24px;
-        }
-
-        footer .social-icons a:hover {
-            color: #ffcc00;
-        }
-
-        .policy-container {
-            margin: 30px 0;
-            padding: 20px;
-            text-align: left;
-            background-color: #1a1a1a;
-            border: 1px solid #333;
-            border-radius: 10px;
-            max-width: 900px;
-        }
-
-        .policy-container h3 {
-            color: #ffcc00;
-        }
-
-        @media (min-width: 768px) {
-            .services {
-                flex-direction: row;
-                flex-wrap: wrap;
-                justify-content: space-between;
-            }
-
-            .service-box {
-                width: 48%;
-            }
-        }
-
-        @media (max-width: 600px) {
-            .menu {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .menu a {
-                margin: 10px 0;
-            }
-
-            .services {
-                width: 90%;
-            }
-
-            footer {
-                font-size: 20px;
-            }
-        }
-        nav {
-            background-color: rgb(13, 14, 13);
-            width: 100%;
-            height: 20vh;
-            color: rgb(226, 231, 231);
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            box-shadow: 5.2px 5.2px 25.3px 5.2px white;
-            font-size: 3rem ;
-        }
-          
-        nav .logo {
-            display: flex;
-            margin-left: -145px;
-        }
-          
-        nav .logo p {
-            font-size: 4rem;
-            letter-spacing: 2px;
-            color: white;
-            padding-left: 9%;
-            font-family: Georgia, 'Times New Roman', Times, serif;
-        }
-          
-        nav .logo img {
-            margin-top: 55px;
-            width: 110px;
-            height: 110px;
-        }
-          
-        nav .menu a {
-            text-decoration: none;
-            color: white;
-            padding: 10px 20px;
-            font-size: 3rem;
-            position: relative;
-        }
-          
-        nav .menu a:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 0%;
-            height: 100%;
-            border-bottom: 2px solid indianred;
-            transition: 0.4s linear;
-        }
-          
-        nav .menu a:hover::before {
-            width: 90%;
-        }
-          
-        nav .menu a:hover {
-            color: rgb(186, 199, 75);
-        }
-          
-        main {
-            margin: 100px 100px 100px;
-            font-size: 3rem ;
-        }
-        h1 {
-            font-size: 3rem;
-            letter-spacing: 2px;
-        }
-        .he {
-            margin-left: 300px;
-        }
-
-        .form-box {
-            width: 60%;
-            margin: 0 auto;
-            padding: 20px;
-            border: 2px solid #ccc;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            background-color: #f9f9f9;
-            color: black;
-        }
-
-        input[type="text"], textarea {
-            width: 90%;
-            padding: 10px;
-            font-size: 2em;
-            margin-bottom: 15px;
-        }
-
-        textarea {
-            height: 150px;
-        }
-
-        button {
-            font-size: 2em;
-            padding: 10px 20px;
-            background-color: #4CAF50;
-            color: rgb(225, 212, 212);
-            border: none;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #45a049;
-        }
-    </style>
+    #downloadLink {
+      display: none;
+      margin-top: 15px;
+      font-size: 1rem;
+      color: #ffcc00;
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <nav>
-            <div class="logo">
-                <img src="../image/bg.png" alt="">
-                <p>A&D</p>
-            </div>
-            <div class="menu">
-                <a href="index1.html">Home</a>
-                <a href="about.html">About</a>
-                <a href="explore.html">Explore</a>
-                <a href="../Register/help.html">Help</a>
-            </div>
-        </nav>
-    </header><br>
-    <div class="container">
-        <h1>Encrypt File</h1>
-        <input type="file" id="fileInput" />
-        <input type="password" id="passwordInput" placeholder="Enter Encryption Key" />
-        <button id="encryptButton">Encrypt and Download</button>
-        <a id="downloadLink" download>Download Encrypted File</a>
-    </div>
 
-    <script>
-        async function encryptFile(file, password) {
-            const encoder = new TextEncoder();
-            const keyMaterial = await window.crypto.subtle.importKey(
-                'raw',
-                encoder.encode(password),
-                'PBKDF2',
-                false,
-                ['deriveBits', 'deriveKey']
-            );
+<nav>
+  <div class="logo">
+    <img src="../image/bg.png" alt="Logo">
+    <p>A&D</p>
+  </div>
+  <div class="menu">
+    <a href="index1.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="explore.html">Explore</a>
+    <a href="../Register/help.html">Help</a>
+  </div>
+</nav>
 
-            const salt = window.crypto.getRandomValues(new Uint8Array(16));
-            const key = await window.crypto.subtle.deriveKey(
-                {
-                    name: 'PBKDF2',
-                    salt: salt,
-                    iterations: 100000,
-                    hash: 'SHA-256'
-                },
-                keyMaterial,
-                { name: 'AES-GCM', length: 256 },
-                false,
-                ['encrypt']
-            );
+<h1>Encrypt Your File Securely</h1>
 
-            const fileData = await file.arrayBuffer();
-            const iv = window.crypto.getRandomValues(new Uint8Array(12));
-            const encryptedData = await window.crypto.subtle.encrypt(
-                { name: 'AES-GCM', iv: iv },
-                key,
-                fileData
-            );
+<div class="container">
+  <input type="file" id="fileInput" />
+  <input type="password" id="passwordInput" placeholder="Enter Encryption Key" />
+  <button id="encryptButton">Encrypt and Download</button>
+  <a id="downloadLink" download>Download Encrypted File</a>
+</div>
 
-            return {
-                encrypted: new Uint8Array(encryptedData),
-                salt: salt,
-                iv: iv
-            };
-        }
+<script>
+async function encryptFile(file, password) {
+    const encoder = new TextEncoder();
+    const keyMaterial = await crypto.subtle.importKey(
+        'raw',
+        encoder.encode(password),
+        'PBKDF2',
+        false,
+        ['deriveKey']
+    );
 
-        document.getElementById("encryptButton").addEventListener("click", async () => {
-            const fileInput = document.getElementById("fileInput");
-            const password = document.getElementById("passwordInput").value;
+    const salt = crypto.getRandomValues(new Uint8Array(16));
+    const key = await crypto.subtle.deriveKey(
+        {
+            name: 'PBKDF2',
+            salt: salt,
+            iterations: 100000,
+            hash: 'SHA-256'
+        },
+        keyMaterial,
+        { name: 'AES-GCM', length: 256 },
+        false,
+        ['encrypt']
+    );
 
-            if (fileInput.files.length === 0 || password === "") {
-                alert("Please select a file and enter a password!");
-                return;
-            }
+    const iv = crypto.getRandomValues(new Uint8Array(12));
+    const encryptedData = await crypto.subtle.encrypt(
+        { name: 'AES-GCM', iv: iv },
+        key,
+        await file.arrayBuffer()
+    );
 
-            const file = fileInput.files[0];
-            const { encrypted, salt, iv } = await encryptFile(file, password);
-            const blob = new Blob([salt, iv, encrypted], { type: 'application/octet-stream' });
+    return { encrypted: new Uint8Array(encryptedData), salt, iv };
+}
 
-            const downloadLink = document.getElementById('downloadLink');
-            downloadLink.href = URL.createObjectURL(blob);
-            downloadLink.download = `encrypted_${file.name}`;
-            downloadLink.style.display = 'block';
-            downloadLink.innerText = `Download Encrypted File (${file.name})`;
+async function logEncryptionActivity(fileName) {
+    const userEmail = localStorage.getItem("user_email") || localStorage.getItem("email");
+    if (!userEmail) {
+        console.error("User email not found in localStorage; cannot log activity.");
+        return;
+    }
+
+    try {
+        const formData = new FormData();
+        formData.append("user_email", userEmail);
+        formData.append("activity", `Encrypted file: ${fileName}`);
+
+        const response = await fetch("http://127.0.0.1:8000/log_activity", {
+            method: "POST",
+            body: formData
         });
-    </script>
+
+        if (response.ok) {
+            console.log("✅ Activity logged successfully.");
+        } else {
+            console.error("❌ Failed to log activity. Status:", response.status);
+            const errorText = await response.text();
+            console.error("Response:", errorText);
+        }
+    } catch (error) {
+        console.error("❌ Error logging activity:", error);
+    }
+}
+
+document.getElementById("encryptButton").addEventListener("click", async () => {
+    const fileInput = document.getElementById("fileInput");
+    const password = document.getElementById("passwordInput").value;
+
+    if (!fileInput.files.length || !password) {
+        alert("Please select a file and enter a password!");
+        return;
+    }
+
+    const file = fileInput.files[0];
+    const { encrypted, salt, iv } = await encryptFile(file, password);
+    const blob = new Blob([salt, iv, encrypted], { type: 'application/octet-stream' });
+
+    const downloadLink = document.getElementById("downloadLink");
+    downloadLink.href = URL.createObjectURL(blob);
+    downloadLink.download = `encrypted_${file.name}`;
+    downloadLink.style.display = 'block';
+    downloadLink.textContent = `Download Encrypted File (${file.name})`;
+
+    await logEncryptionActivity(file.name);
+});
+</script>
+
 </body>
 </html>

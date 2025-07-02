@@ -1,202 +1,221 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Message Decryption</title>
-    <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css">
-    <script defer src="https://pyscript.net/latest/pyscript.js"></script>
-    <style>
-        body{
-            background-color: #000000;
-            color: aliceblue;
-            font-size: 2rem;
-        }
-        header {
-            display: flex;
-          }
-          
-          nav {
-            background-color: rgb(13, 14, 13);
-            width: 100%;
-            height: 20vh;
-            color: rgb(226, 231, 231);
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            box-shadow: 5.2px 5.2px 25.3px 5.2px white;
-          }
-          
-          nav .logo {
-            display: flex;
-            margin-left: -145px;
-          }
-          
-          nav .logo p {
-            font-size: 4rem;
-            letter-spacing: 2px;
-            color: white;
-            padding-left: 9%;
-            font-family: Georgia, 'Times New Roman', Times, serif;
-          }
-          
-          nav .logo img {
-            margin-top: 55px;
-            width: 110px;
-            height: 110px;
-          }
-          
-          nav .menu a {
-            text-decoration: none;
-            color: white;
-            padding: 10px 20px;
-            font-size: 3rem;
-            position: relative;
-          }
-          
-          nav .menu a:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 0%;
-            height: 100%;
-            border-bottom: 2px solid indianred;
-            transition: 0.4s linear;
-          }
-          
-          nav .menu a:hover::before {
-            width: 90%;
-          }
-          
-          nav .menu a:hover {
-            color: rgb(186, 199, 75);
-          }
-          
-          main {
-            margin: 100px 100px 100px;
-          }
-          h1{
-            font-size: 3rem;
-            letter-spacing: 2px;
-          }
-          .he{
-            margin-left: 300px;
-          }
-          
-      
-        
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Message Decryption - A&D</title>
 
-        /* Outer box containing the form */
-        .form-box {
-            width: 60%; /* Adjust as needed */
-            margin: 0 auto; /* Center the box */
-            padding: 20px;
-            border: 2px solid #ccc; /* Border around the box */
-            border-radius: 10px; /* Rounded corners */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow for effect */
-            background-color: #f9f9f9; /* Light background color */
-            color:black;
-            font-size: 1em;
-        }
+  <!-- CryptoJS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js"></script>
 
-        input[type="text"], input[type="email"], textarea {
-            width: 90%; /* Adjusted width */
-            padding: 10px;
-            font-size: 1em;
-            margin-bottom: 15px;
-        }
-
-        textarea {
-            height: 150px;
-        }
-
-        button {
-            font-size: 1em;
-            padding: 10px 20px;
-            background-color: #4CAF50;
-            color: rgb(225, 212, 212);
-            border: none;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #45a049; /* Button hover effect */
-        }
-
-   
-    </style>
+  <style>
+    body {
+      background-color: #000;
+      color: #f0f0f0;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    nav {
+      background-color: #0d0e0d;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      flex-wrap: wrap;
+      box-shadow: 0 2px 10px rgba(255,255,255,0.05);
+    }
+    nav .logo {
+      display: flex;
+      align-items: center;
+    }
+    nav .logo img {
+      width: 50px;
+      height: 50px;
+      border-radius: 5px;
+      margin-right: 10px;
+    }
+    nav .logo p {
+      font-size: 1.5rem;
+      letter-spacing: 1px;
+      font-family: Georgia, 'Times New Roman', Times, serif;
+    }
+    nav .menu {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    nav .menu a {
+      color: white;
+      text-decoration: none;
+      padding: 8px 12px;
+      font-size: 1rem;
+      position: relative;
+      transition: color 0.3s;
+    }
+    nav .menu a::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background-color: indianred;
+      transition: width 0.3s;
+    }
+    nav .menu a:hover::before {
+      width: 100%;
+    }
+    nav .menu a:hover {
+      color: #ffcc00;
+    }
+    main {
+      flex: 1;
+      max-width: 600px;
+      width: 90%;
+      margin: 30px auto;
+      background-color: #111;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+    }
+    h1 {
+      font-size: 1.8rem;
+      color: #feca57;
+      margin-bottom: 10px;
+    }
+    label {
+      display: block;
+      margin: 15px 0 5px;
+      text-align: left;
+    }
+    input, textarea {
+      width: 100%;
+      font-size: 1rem;
+      padding: 10px;
+      border-radius: 5px;
+      border: none;
+      background-color: #222;
+      color: #f0f0f0;
+      resize: vertical;
+    }
+    button {
+      font-size: 1rem;
+      padding: 10px 20px;
+      margin-top: 15px;
+      cursor: pointer;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    p#decryptedMessageDisplay {
+      word-break: break-all;
+      background-color: #222;
+      padding: 10px;
+      border-radius: 5px;
+      margin-top: 15px;
+      font-size: 0.9rem;
+      text-align: left;
+    }
+    @media (min-width: 768px) {
+      h1 {
+        font-size: 2rem;
+      }
+      input, textarea, button {
+        font-size: 1.1rem;
+      }
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <nav>
-            <div class="logo">
-                <img src="../image/bg.png" alt="">
-                <p>A&D</p>
-            </div>
-            <div class="menu">
-                <a href="index1.html">Home</a>
-                <a href="about.html">About</a>
-                <a href="explore.html">Explore</a>
-                <a href="../Register/help.html">Help</a>
-            </div>
-        </nav>
-  </header><br>
-  <div class="he">
+
+  <nav>
+    <div class="logo">
+      <img src="../image/bg.png" alt="Logo" />
+      <p>A&D</p>
+    </div>
+    <div class="menu">
+      <a href="index1.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="explore.html">Explore</a>
+      <a href="../Register/help.html">Help</a>
+    </div>
+  </nav>
+
+  <main>
     <h1>Message Decryption</h1>
 
-    <!-- Section for decrypting message -->
-    <h3>Decrypt Message</h3>
     <label for="securityKey">Enter Encryption Key:</label>
-    <input type="text" id="securityKey" placeholder="Enter security key"><br><br>
-    
+    <input type="text" id="securityKey" placeholder="Enter the encryption key here" />
+
     <label for="encryptedMessageInput">Enter Encrypted Message:</label>
-    <textarea id="encryptedMessageInput" rows="2" cols="100" placeholder="Paste the encrypted message here"></textarea><br><br>
+    <textarea id="encryptedMessageInput" rows="6" placeholder="Paste the encrypted message here"></textarea>
 
     <button id="decryptMessageBtn">Decrypt Message</button>
     <p id="decryptedMessageDisplay"></p>
-</div>
-    <!-- <py-env>
-        - micropip
-    </py-env> -->
+  </main>
 
-    <py-script>
-        import micropip
-        import asyncio
-        import js
-        
-        # Install cryptography package
-        async def setup_cryptography():
-            await micropip.install("cryptography")
-            js.console.log("Cryptography package installed.")
-        
-        # Function to decrypt message
-        def decrypt_message(encrypted_message, encryption_key):
-            from cryptography.fernet import Fernet
-            cipher_suite = Fernet(encryption_key)
-            encrypted_message_bytes = bytes(encrypted_message, 'utf-8')
-            decrypted_message_bytes = cipher_suite.decrypt(encrypted_message_bytes)
-            return decrypted_message_bytes.decode()
-        
-        # Decrypt message and display decrypted message
-        def handle_decrypt_message(*args):
-            encryption_key = Element("securityKey").element.value
-            encrypted_message = Element("encryptedMessageInput").element.value
-            if encryption_key and encrypted_message:
-                try:
-                    decrypted_message = decrypt_message(encrypted_message, encryption_key.encode())
-                    Element("decryptedMessageDisplay").element.innerHTML = f"Decrypted Message: {decrypted_message}"
-                except Exception as e:
-                    Element("decryptedMessageDisplay").element.innerHTML = f"Error: {str(e)}"
-            else:
-                Element("decryptedMessageDisplay").element.innerHTML = "Please enter an encryption key and an encrypted message."
-        
-        # Attach function to button click
-        async def main():
-            await setup_cryptography()
-            Element("decryptMessageBtn").element.onclick = handle_decrypt_message
-        
-        asyncio.ensure_future(main())
-    </py-script>
+  <script>
+    // Logging function to FastAPI
+    function logActivity() {
+      const userEmail = localStorage.getItem("user_email");
+      if (!userEmail) {
+        console.warn("User not logged in, skipping activity log.");
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append("user_email", userEmail);
+      formData.append("activity", "Used Message Decryption Tool");
+
+      fetch("http://127.0.0.1:8000/log_activity", {
+        method: "POST",
+        body: formData
+      })
+      .then(response => {
+        if (!response.ok) {
+          console.error("Failed to log activity to FastAPI.");
+        }
+      })
+      .catch(error => console.error("Error logging activity:", error));
+    }
+
+    document.getElementById("decryptMessageBtn").addEventListener("click", function () {
+      const key = document.getElementById("securityKey").value.trim();
+      const encryptedMessage = document.getElementById("encryptedMessageInput").value.trim();
+
+      if (!key || !encryptedMessage) {
+        document.getElementById("decryptedMessageDisplay").innerText =
+          "⚠️ Please enter both the encryption key and the encrypted message.";
+        return;
+      }
+
+      try {
+        const decrypted = CryptoJS.AES.decrypt(encryptedMessage, key).toString(CryptoJS.enc.Utf8);
+
+        if (!decrypted) {
+          document.getElementById("decryptedMessageDisplay").innerText =
+            "⚠️ Incorrect key or corrupted message.";
+        } else {
+          document.getElementById("decryptedMessageDisplay").innerText =
+            "🔓 Decrypted Message:\n" + decrypted;
+          logActivity(); // Log activity only on successful decryption
+        }
+      } catch (error) {
+        document.getElementById("decryptedMessageDisplay").innerText =
+          "⚠️ Error decrypting message. Check your inputs.";
+      }
+    });
+  </script>
+
 </body>
 </html>

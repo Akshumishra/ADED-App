@@ -1,200 +1,208 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Message Encryption - A&D</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Message Encryption - A&D</title>
 
-    <!-- PyScript -->
-    <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css">
-    <script defer src="https://pyscript.net/latest/pyscript.js"></script>
+  <!-- CryptoJS for browser-safe encryption -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js"></script>
 
-    <style>
-        body {
-            background-color: #000000;
-            color: aliceblue;
-            font-size: 2rem;
-            margin: 0;
-            padding: 0;
-        }
-
-        nav {
-            background-color: rgb(13, 14, 13);
-            width: 100%;
-            height: 20vh;
-            color: white;
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            box-shadow: 5.2px 5.2px 25.3px 5.2px white;
-        }
-
-        nav .logo {
-            display: flex;
-            align-items: center;
-        }
-
-        nav .logo img {
-            width: 110px;
-            height: 110px;
-            margin-top: 10px;
-            margin-right: 10px;
-        }
-
-        nav .logo p {
-            font-size: 3rem;
-            font-family: Georgia, 'Times New Roman', Times, serif;
-            letter-spacing: 2px;
-        }
-
-        nav .menu a {
-            color: white;
-            text-decoration: none;
-            padding: 10px 20px;
-            font-size: 1.5rem;
-            position: relative;
-        }
-
-        nav .menu a:hover {
-            color: rgb(186, 199, 75);
-        }
-
-        main {
-            margin: 50px auto;
-            width: 80%;
-            max-width: 800px;
-            background-color: #111;
-            padding: 20px;
-            border-radius: 10px;
-        }
-
-        h1 {
-            font-size: 2.5rem;
-            text-align: center;
-        }
-
-        textarea {
-            width: 100%;
-            font-size: 1.2rem;
-            padding: 10px;
-            margin-top: 10px;
-            border-radius: 5px;
-        }
-
-        button {
-            font-size: 1.2rem;
-            padding: 10px 20px;
-            margin-top: 15px;
-            cursor: pointer;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 5px;
-        }
-
-        button:hover {
-            background-color: #45a049;
-        }
-
-        p#encryptionKeyDisplay,
-        p#encryptedMessage {
-            word-break: break-all;
-            background-color: #222;
-            padding: 10px;
-            border-radius: 5px;
-            margin-top: 10px;
-        }
-    </style>
+  <style>
+    body {
+      background-color: #000;
+      color: #f0f0f0;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    nav {
+      background-color: #0d0e0d;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      flex-wrap: wrap;
+      box-shadow: 0 2px 10px rgba(255,255,255,0.05);
+    }
+    nav .logo {
+      display: flex;
+      align-items: center;
+    }
+    nav .logo img {
+      width: 50px;
+      height: 50px;
+      border-radius: 5px;
+      margin-right: 10px;
+    }
+    nav .logo p {
+      font-size: 1.5rem;
+      letter-spacing: 1px;
+      font-family: Georgia, 'Times New Roman', Times, serif;
+    }
+    nav .menu {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    nav .menu a {
+      color: white;
+      text-decoration: none;
+      padding: 8px 12px;
+      font-size: 1rem;
+      position: relative;
+      transition: color 0.3s;
+    }
+    nav .menu a::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background-color: indianred;
+      transition: width 0.3s;
+    }
+    nav .menu a:hover::before {
+      width: 100%;
+    }
+    nav .menu a:hover {
+      color: #ffcc00;
+    }
+    main {
+      flex: 1;
+      max-width: 600px;
+      width: 90%;
+      margin: 30px auto;
+      background-color: #111;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+    }
+    h1 {
+      font-size: 1.8rem;
+      color: #feca57;
+      margin-bottom: 10px;
+    }
+    p {
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+    textarea {
+      width: 100%;
+      font-size: 1rem;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 5px;
+      border: none;
+      background-color: #222;
+      color: #f0f0f0;
+      resize: vertical;
+    }
+    button {
+      font-size: 1rem;
+      padding: 10px 20px;
+      margin-top: 15px;
+      cursor: pointer;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    p#encryptionKeyDisplay,
+    p#encryptedMessage {
+      word-break: break-all;
+      background-color: #222;
+      padding: 10px;
+      border-radius: 5px;
+      margin-top: 15px;
+      font-size: 0.9rem;
+      text-align: left;
+    }
+    @media (min-width: 768px) {
+      h1 { font-size: 2rem; }
+      p, textarea, button { font-size: 1.1rem; }
+    }
+  </style>
 </head>
 <body>
 
-    <!-- Navbar -->
-    <nav>
-        <div class="logo">
-            <img src="../image/bg.png" alt="Logo">
-            <p>A&D</p>
-        </div>
-        <div class="menu">
-            <a href="index1.html">Home</a>
-            <a href="about.html">About</a>
-            <a href="explore.html">Explore</a>
-            <a href="../Register/help.html">Help</a>
-        </div>
-    </nav>
+  <!-- Navbar -->
+  <nav>
+    <div class="logo">
+      <img src="../image/bg.png" alt="Logo" />
+      <p>A&D</p>
+    </div>
+    <div class="menu">
+      <a href="index1.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="explore.html">Explore</a>
+      <a href="../Register/help.html">Help</a>
+    </div>
+  </nav>
 
-    <!-- Main Content -->
-    <main>
-        <h1>Message Encryption</h1>
-        <p>Enter your message below to encrypt:</p>
-        <textarea id="messageInput" rows="6" placeholder="Enter your message here"></textarea>
-        <br>
-        <button id="encryptMessageBtn">Encrypt Message</button>
-        <p id="encryptionKeyDisplay"></p>
-        <p id="encryptedMessage"></p>
-    </main>
+  <!-- Main Content -->
+  <main>
+    <h1>Message Encryption</h1>
+    <p>Enter your message below to encrypt:</p>
+    <textarea id="messageInput" rows="6" placeholder="Enter your message here"></textarea>
+    <br />
+    <button id="encryptMessageBtn">Encrypt Message</button>
+    <p id="encryptionKeyDisplay"></p>
+    <p id="encryptedMessage"></p>
+  </main>
 
-    <!-- JS: Handle login check and logging activity -->
-    <script>
-        // Check if user is logged in
-        const userEmail = localStorage.getItem("user_email");
-        if (!userEmail) {
-            alert("You are not logged in. Redirecting to login page.");
-            window.location.href = "../Register/login.html";
+  <script>
+    // Login check
+    const userEmail = localStorage.getItem("user_email");
+    if (!userEmail) {
+      alert("You are not logged in. Redirecting to login page.");
+      window.location.href = "../Register/login.html";
+    }
+
+    // Log activity to FastAPI
+    function logActivity() {
+      const formData = new FormData();
+      formData.append("user_email", userEmail);
+      formData.append("activity", "Used Message Encryption Tool");
+
+      fetch("http://127.0.0.1:8000/log_activity", {
+        method: "POST",
+        body: formData
+      })
+      .then(response => {
+        if (!response.ok) {
+          console.error("Failed to log activity to FastAPI.");
         }
+      })
+      .catch(error => console.error("Activity log error:", error));
+    }
 
-        // Function to log activity when encryption is used
-        function logActivity() {
-            const formData = new FormData();
-            formData.append("user_email", userEmail);
-            formData.append("activity", "Used Encryption Tool");
+    // Encryption logic
+    document.getElementById("encryptMessageBtn").addEventListener("click", function() {
+      const message = document.getElementById("messageInput").value.trim();
+      if (!message) {
+        document.getElementById("encryptedMessage").innerText = "⚠️ Please enter a message to encrypt.";
+        return;
+      }
 
-            fetch("http://127.0.0.1:8000/log_activity", {
-                method: "POST",
-                body: formData
-            }).catch(error => console.error("Activity log error:", error));
-        }
-    </script>
+      const key = CryptoJS.lib.WordArray.random(16).toString(); // 128-bit random key
+      const encrypted = CryptoJS.AES.encrypt(message, key).toString();
 
-    <!-- PyScript Encryption -->
-    <py-script>
-        import micropip
-        import asyncio
-        import js
+      document.getElementById("encryptionKeyDisplay").innerText = "🔑 Encryption Key:\n" + key;
+      document.getElementById("encryptedMessage").innerText = "🔒 Encrypted Message:\n" + encrypted;
 
-        async def setup():
-            await micropip.install("cryptography")
-            js.console.log("cryptography installed")
-
-        def generate_key():
-            from cryptography.fernet import Fernet
-            return Fernet.generate_key()
-
-        def encrypt_message(message, key):
-            from cryptography.fernet import Fernet
-            f = Fernet(key)
-            return f.encrypt(message.encode()).decode()
-
-        def handle_encryption(event):
-            message = Element("messageInput").element.value
-            if not message.strip():
-                Element("encryptedMessage").element.innerText = "Please enter a message to encrypt."
-                return
-
-            key = generate_key()
-            encrypted = encrypt_message(message, key)
-
-            Element("encryptionKeyDisplay").element.innerText = f"Encryption Key:\n{key.decode()}"
-            Element("encryptedMessage").element.innerText = f"Encrypted Message:\n{encrypted}"
-
-            # Trigger JS function to log activity
-            js.logActivity()
-
-        async def main():
-            await setup()
-            Element("encryptMessageBtn").element.onclick = handle_encryption
-
-        asyncio.ensure_future(main())
-    </py-script>
+      logActivity(); // Log activity on encryption
+    });
+  </script>
 
 </body>
 </html>

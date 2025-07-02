@@ -1,250 +1,198 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About A&D</title>
-   
-    
-    <style>
-            body {
-            margin: 0;
-            font-family: 'Arial', sans-serif;
-            background-color: #1a1a1a;
-            color: #f0f0f0;
-            line-height: 1.6;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px;
-            font-size: 3rem ;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About A&D</title>
+  <style>
+    :root {
+      --primary-color: #ffcc00;
+      --secondary-color: #1a1a1a;
+      --accent-color: #2c2c2c;
+      --text-color: #f0f0f0;
+    }
 
-        header {
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: #2c2c2c;
-            padding: 10px 20px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-        }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-        .logo img {
-            height: 50px;
-            border-radius: 5px;
-        }
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: var(--secondary-color);
+      color: var(--text-color);
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1rem;
+    }
 
-        .menu a {
-            margin: 0 15px;
-            color: #ffffff;
-            text-decoration: none;
-            font-size: 3rem;
-            transition: color 0.3s;
-        }
+    header {
+      width: 100%;
+      background-color: var(--accent-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.5rem 1rem;
+      flex-wrap: wrap;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    }
 
-        .menu a:hover {
-            color: #ffcc00;
-        }
-        nav {
-            background-color: rgb(13, 14, 13);
-            width: 100%;
-            height: 20vh;
-            color: rgb(226, 231, 231);
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            box-shadow: 5.2px 5.2px 25.3px 5.2px white;
-            font-size: 3rem ;
-        }
-          
-        nav .logo {
-            display: flex;
-            margin-left: -145px;
-        }
-          
-        nav .logo p {
-            font-size: 4rem;
-            letter-spacing: 2px;
-            color: white;
-            padding-left: 9%;
-            font-family: Georgia, 'Times New Roman', Times, serif;
-        }
-          
-        nav .logo img {
-            margin-top: 55px;
-            width: 110px;
-            height: 110px;
-        }
-          
-        nav .menu a {
-            text-decoration: none;
-            color: white;
-            padding: 10px 20px;
-            font-size: 3rem;
-            position: relative;
-        }
-          
-        nav .menu a:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 0%;
-            height: 100%;
-            border-bottom: 2px solid indianred;
-            transition: 0.4s linear;
-        }
-          
-        nav .menu a:hover::before {
-            width: 90%;
-        }
-          
-        nav .menu a:hover {
-            color: rgb(186, 199, 75);
-        }
-          
-        main {
-            margin: 100px 100px 100px;
-            font-size: 3rem ;
-        }
+    .logo {
+      display: flex;
+      align-items: center;
+    }
 
-        h1 {
-            font-size: 3rem;
-            letter-spacing: 2px;
-            text-align: center;
-        }
-        p {
-            font-size: 2rem;
-        }
-        ul {
-            list-style-type: none;
-            padding-left: 0;
-            font-size: 2rem;
-        }
-        li {
-            margin-bottom: 20px;
-            font-size: 2rem;
-        }
-        footer {
-            width: 100%;
-            background-color: #232323;
-            padding: 40px 20px;
-            text-align: center;
-            color: #f0f0f0;
-            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.5);
-            margin-top: auto;
-            font-size: 14px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+    .logo img {
+      height: 50px;
+      border-radius: 5px;
+      margin-right: 0.5rem;
+    }
 
-        footer h3 {
-            margin: 20px 0;
-            font-size: 22px;
-            color: #ffcc00;
-        }
+    .logo p {
+      font-size: 1.5rem;
+      font-family: Georgia, 'Times New Roman', Times, serif;
+      font-weight: bold;
+    }
 
-        footer p {
-            max-width: 900px;
-            line-height: 1.8;
-            margin-bottom: 20px;
-            text-align: justify;
-        }
+    .menu {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
 
-        footer ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 20px 0;
-        }
+    .menu a {
+      color: var(--text-color);
+      text-decoration: none;
+      font-size: 1rem;
+      margin: 0.5rem;
+      padding: 0.5rem;
+      position: relative;
+      transition: color 0.3s;
+    }
 
-        footer ul li {
-            margin: 10px 0;
-        }
+    .menu a:hover {
+      color: var(--primary-color);
+    }
 
-        footer a {
-            color: #ffcc00;
-            text-decoration: none;
-            margin: 0 10px;
-            font-size: 16px;
-            transition: color 0.3s;
-        }
+    h1 {
+      font-size: 2rem;
+      text-align: center;
+      margin: 1rem 0;
+    }
 
-        footer a:hover {
-            color: #e6b800;
-        }
+    .about-container {
+      max-width: 900px;
+      width: 95%;
+      background-color: #2c2c2c;
+      border-radius: 10px;
+      padding: 1rem;
+      margin: 1rem auto;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
 
-        footer .social-icons {
-            margin-top: 20px;
-        }
+    .about-container p {
+      font-size: 1rem;
+      margin: 1rem 0;
+      text-align: justify;
+    }
 
-        footer .social-icons a {
-            margin: 0 10px;
-            font-size: 24px;
-        }
+    .about-container h2 {
+      font-size: 1.3rem;
+      margin: 1rem 0 0.5rem;
+      color: var(--primary-color);
+    }
 
-        footer .social-icons a:hover {
-            color: #ffcc00;
-        }
-        .service-icon{
-            align-items: center;
-            margin-left: 38%;
-        }
-        .policy-container {
-            margin: 30px 0;
-            padding: 20px;
-            text-align: left;
-            background-color: #1a1a1a;
-            border: 1px solid #333;
-            border-radius: 10px;
-            max-width: 900px;
-        }
+    .about-container ul {
+      list-style-type: disc;
+      margin-left: 1.5rem;
+      margin-bottom: 1rem;
+    }
 
-        .policy-container h3 {
-            color: #ffcc00;
-        }
-    </style>
+    .about-container li {
+      margin-bottom: 0.5rem;
+      font-size: 1rem;
+    }
+
+    .about-container img {
+      width: 100%;
+      max-width: 600px;
+      height: auto;
+      border-radius: 8px;
+      margin: 1rem auto;
+      display: block;
+    }
+
+    @media (min-width: 600px) {
+      h1 {
+        font-size: 2.2rem;
+      }
+      .about-container p,
+      .about-container li {
+        font-size: 1.1rem;
+      }
+    }
+
+    @media (min-width: 900px) {
+      h1 {
+        font-size: 2.4rem;
+      }
+      .menu a {
+        font-size: 1.1rem;
+      }
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <nav>
-            <div class="logo">
-                <img src="../image/bg.png" alt="">
-                <p>A&D</p>
-            </div>
-            <div class="menu">
-                <a href="index1.html">Home</a>
-                <a href="about.html">About</a>
-                <a href="explore.html">Explore</a>
-                <a href="../Register/help.html">Help</a>
-               
-            </div>
-        </nav>
-    </header><br>
 
-    <div class="he1 service-box1">
-        <h1>About <b><i>A&D</i></b></h1>
-        <p>Welcome to A&D, your trusted platform for advanced security solutions that prioritize privacy, data protection, and seamless communication. In an increasingly digital world, safeguarding your personal and professional information is more critical than ever. A&D is built to address these needs with a suite of tools designed to ensure that your sensitive data remains secure, while also providing easy-to-use applications that anyone can navigate.</p>
-        <img src="image3.jpg" alt="Password Manager Icon" class="service-icon" width="600" height="300" >
-        <p>Our platform offers a variety of solutions, each meticulously developed to cover distinct aspects of digital security:</p>
-        <ul><h2>Encryption Decryption Message:</h2>
-            <li><b></b> This tool provides end-to-end encryption, enabling users to encode their messages with a unique passkey, ensuring that only authorized recipients can decrypt and access the content. Whether you're sending confidential information to colleagues or private messages to friends, our app guarantees that your communication remains secure at every step.</li>
-            <h2>Data Hiding Through Image:</h2>
-            <li><b></b> Combining encryption with steganography, this feature allows you to embed secret messages within images. The entire image is encrypted, adding an extra layer of protection. This makes A&D perfect for those who need to hide sensitive information in plain sight. Whether you're sharing private data or want to protect intellectual property, our tool ensures that both the image and the hidden message are only accessible to those with the correct decryption key.</li>
-            <img src="imag2.jpg" alt="Password Manager Icon" class="service-icon" width="600" height="300">
-            <h2>File Protector:</h2>
-            <li><b></b> A&D File Encryptor is a secure, browser-based tool designed for encrypting files with ease. It allows users to upload files, apply password-based encryption using AES-GCM, and download the encrypted file. Key security features include password-derived encryption keys, random salt, and initialization vectors (IV) to ensure strong protection. Since all processes are done locally in the browser, your data remains private and secure.</li>
-            <h2>Password Manager:</h2>
-            <li><b></b> Secure Password Manager is a user-friendly web application designed to help users generate, encrypt, and securely store their passwords for various websites. With an emphasis on security and ease of use, this tool provides strong password generation and AES encryption to safeguard your sensitive data.</li>
-        </ul>
-        <br>
-        <img src="img.webp" alt="Password Manager Icon" class="service-icon" width="600" height="300">
-        <p>At A&D, we are committed to bridging the gap between advanced security and user-friendly design. We believe that privacy and protection shouldn't come at the cost of convenience. Our goal is to provide you with a comprehensive suite of security tools that anyone—regardless of technical skill—can use with confidence.</p>
+<header>
+  <div class="logo">
+    <img src="../image/bg.png" alt="A&D Logo">
+    <p>A&D</p>
+  </div>
+  <div class="menu">
+    <a href="index1.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="explore.html">Explore</a>
+    <a href="../Register/help.html">Help</a>
+  </div>
+</header>
 
-        <p>Join us on this journey toward a more secure digital future. Whether you’re an individual looking to protect personal information, or a business in need of robust communication tools, A&D has the solution you need. We are here to help you stay safe in the digital age, one secure interaction at a time.</p>
-    </div>
-</body>
-</html>
-</body>
-</html>
+<main>
+  <h1>About <b><i>A&D</i></b></h1>
+  <div class="about-container">
+    <p>Welcome to A&D, your trusted platform for advanced security solutions that prioritize privacy, data protection, and seamless communication. In an increasingly digital world, safeguarding your personal and professional information is more critical than ever. A&D is built to address these needs with a suite of tools designed to ensure that your sensitive data remains secure, while also providing easy-to-use applications that anyone can navigate.</p>
+
+    <img src="../image/image3.jpg" alt="A&D Overview">
+
+    <p>Our platform offers a variety of solutions, each meticulously developed to cover distinct aspects of digital security:</p>
+
+    <h2>Encryption Decryption Message</h2>
+    <ul>
+      <li>This tool provides end-to-end encryption, enabling users to encode their messages with a unique passkey, ensuring that only authorized recipients can decrypt and access the content. Whether you're sending confidential information to colleagues or private messages to friends, our app guarantees that your communication remains secure at every step.</li>
+    </ul>
+
+    <h2>Data Hiding Through Image</h2>
+    <ul>
+      <li>Combining encryption with steganography, this feature allows you to embed secret messages within images. The entire image is encrypted, adding an extra layer of protection. Whether you're sharing private data or want to protect intellectual property, our tool ensures that both the image and the hidden message are only accessible to those with the correct decryption key.</li>
+    </ul>
+
+    <img src="../image/imag2.jpg" alt="Data Hiding Feature">
+
+    <h2>File Protector</h2>
+    <ul>
+      <li>A&D File Encryptor is a secure, browser-based tool designed for encrypting files with ease. It allows users to upload files, apply password-based encryption using AES-GCM, and download the encrypted file. Key security features include password-derived encryption keys, random salt, and initialization vectors (IV) to ensure strong protection while keeping your data private as all processes are done locally in the browser.</li>
+    </ul>
+
+    <h2>Password Manager</h2>
+    <ul>
+      <li>Secure Password Manager is a user-friendly web application designed to help users generate, encrypt, and securely store their passwords for various websites. With an emphasis on security and ease of use, this tool provides strong password generation and AES encryption to safeguard your sensitive data.</li>
+    </ul>
+
+    <img src="../image/img.webp" alt="Password Manager Feature">
+
+    <p>At A&D, we are committed to bridging the gap between advanced security and user-friendly design. We believe that privacy and protection shouldn't come at the cost of convenience. Our goal is to provide you with a comprehensive suite of security tools that anyone—regardless of technical skill—can use with confidence.</p>
+
+    <p>Join us on this journey toward a more secure digital future. Whether you’re an individual looking
