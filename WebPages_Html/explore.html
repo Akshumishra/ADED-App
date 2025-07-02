@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>ED</title>
+    <title>A&D</title>
+    
     <style>
-           body {
+        body {
             margin: 0;
             font-family: 'Arial', sans-serif;
             background-color: #1a1a1a;
@@ -16,7 +16,7 @@
             flex-direction: column;
             align-items: center;
             padding: 20px;
-         
+            font-size: 1rem ;
         }
 
         header {
@@ -38,7 +38,7 @@
             margin: 0 15px;
             color: #ffffff;
             text-decoration: none;
-            font-size: 1.5rem;
+            font-size: 3rem;
             transition: color 0.3s;
         }
 
@@ -54,62 +54,7 @@
             margin-top: 20px;
         }
 
-        .service-box {
-            position: relative;
-            background-color: #333;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-            overflow: hidden;
-            margin-bottom: 20px;
-            width: 100%;
-            transition: transform 0.3s, box-shadow 0.3s;
-            max-width: 1000px;
-            min-width: 300px;
-            font-size: 2rem ;
-        }
-
-        .service-box:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
-        }
-
-        .service-icon {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            transition: transform 0.3s;
-        }
-
-        .service-box:hover .service-icon {
-            transform: scale(1.1);
-        }
-
-        .service-info {
-            padding: 20px;
-            text-align: center;
-        }
-
-        .service-info h3 {
-            margin: 10px 0;
-            font-size: 3rem;
-            color: #ffcc00;
-        }
-
-        .service-info a {
-            display: inline-block;
-            margin-top: 10px;
-            padding: 10px 15px;
-            background-color: #ffcc00;
-            color: #000;
-            border-radius: 5px;
-            text-decoration: none;
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        .service-info a:hover {
-            background-color: #e6b800;
-            color: #fff;
-        }
+      
 
         footer {
             width: 100%;
@@ -226,7 +171,7 @@
             justify-content: space-around;
             align-items: center;
             box-shadow: 5.2px 5.2px 25.3px 5.2px white;
-            font-size: 1.5rem ;
+            font-size: 3rem ;
         }
           
         nav .logo {
@@ -277,7 +222,7 @@
           
         main {
             margin: 100px 100px 100px;
-            font-size: 3rem ;
+            font-size: 1rem ;
         }
         h1 {
             font-size: 3rem;
@@ -285,54 +230,194 @@
         }
         .he {
             margin-left: 300px;
-        }    .service-box {
-                background-color: #f4f4f4;
-                margin-left: 30px;
-                border: 1px solid #ddd;
-                border-radius: 30px;
-                padding: 20px;
-                width: 90%;
-                color: black;
-                font-size: 2rem;
-                box-shadow: 0 5px 10px whitesmoke;
-                margin-bottom: 20px;
-            }
-            .service-box a{
-                text-decoration: none;
-                color: #000000;
-            }
-            h1{
-                margin-left: 50px;
-            }
-        </style>
+        }
+        .hero {
+            background: url('explore-bg.jpg') no-repeat center center/cover;
+            height: 80vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-right: 100px;
+            letter-spacing: 3px;
+            text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.8);
+        }
+
+        /* Main Content */
+        main {
+            padding: 50px 20px;
+            background-color: #111;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: #feca57;
+        }
+
+        .explore-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 30px;
+        }
+
+        /* Service Box Styles */
+        .explore-box {
+            background-color: #1a1a1a;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            font-size: 2em;
+        }
+
+        .explore-box img {
+            width: 120px;
+            height: 120px;
+            margin-bottom: 20px;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+        }
+
+        .explore-box h2 {
+            font-size: 3rem;
+            color: #feca57;
+            margin-bottom: 10px;
+        }
+
+        .explore-box p {
+            font-size: 1.8rem;
+            color: #cccccc;
+            margin-bottom: 30px;
+        }
+
+        .explore-box a {
+            background-color: #feca57;
+            padding: 10px 20px;
+            color: #000;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            font-size: 1em;
+        }
+
+        .explore-box a:hover {
+            background-color: #ffbb33;
+            color: #fff;
+        }
+
+        /* Hover Effects */
+        .explore-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+        }
+
+        .explore-box:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Footer Section */
+        footer {
+            background-color: #1a1a1a;
+            padding: 30px 0;
+            color: #fff;
+            text-align: center;
+        }
+
+        footer p {
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+
+        footer a {
+            color: #feca57;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <nav>
-            <div class="logo">
-                <img src="image.png" alt="">
-                <p>A&D</p>
-            </div>
-            <div class="menu">
-                <a href="index.html">Home</a>
-                <a href="about.html">About</a>
-                <a href="explore.html">Explore</a>
-                <a href="help.html">Help</a>
-            </div>
-        </nav>
+<header>
+    <nav>
+        <div class="logo">
+            <img src="../image/bg.png" alt="">
+            <p>A&D</p>
+        </div>
+        <div class="menu">
+            <a href="index1.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="explore.html">Explore</a>
+            <a href="../Register/help.html">Help</a>
+        </div>
+    </nav>
+</header>
+
+
+       
+<section class="hero">
+    <h1>Explore the World of A&D </h1>
+    <img src="img.webp" alt="Encryption Icon"  height="700">
+</section>
+
+<!-- Main Content -->
+<main>
+    <h1>Discover Our Features</h1>
+    <div class="explore-grid">
+        <!-- Encryption Decryption Service -->
+        <div class="explore-box">
+            <img src="image1.jpg" alt="Encryption Icon">
+            <h2>Encryption Decryption</h2>
+            <p>Secure your messages with our advanced encryption tool, ensuring privacy and protection.</p>
+            <a href="EDindex.html">Learn More</a>
+        </div>
+
+        <!-- Data Hiding Through Image -->
+        <div class="explore-box">
+            <img src="imag2.jpg" alt="Data Hiding Icon">
+            <h2>Data Hiding</h2>
+            <p>Hide sensitive information in images using encryption and steganography.</p>
+            <a href="ImageIndex.html">Learn More</a>
+        </div>
+
+        <!-- Password Manager -->
+        <div class="explore-box">
+            <img src="image3.jpg" alt="Password Manager Icon">
+            <h2>Password Manager</h2>
+            <p>Generate and securely store passwords with our password management tool.</p>
+            <a href="Password.html">Learn More</a>
+        </div>
+
+        <!-- File Protector -->
+        <div class="explore-box">
+            <img src="image4.jpeg" alt="File Protector Icon">
+            <h2>File Protector</h2>
+            <p>Encrypt your files for added security and protection against unauthorized access.</p>
+            <a href="Findex.html">Learn More</a>
+        </div>
     </div>
-  </header>
-        <br>
-        <h1>Welcome to Image  Message Hiding Encryption and Decryption </h1>
-        <div class="service-box">
-            <a href="encryptP.html"><h2><u><i>Encrypt Image and Message</i></u></h2>
-            <p><b>Image encryption with a hidden message secures both the visual content of an image and a secret message embedded within it. The image and message are encrypted together, ensuring that both remain protected until decrypted, providing enhanced security for sensitive data.</b></p>
-            </a>
-        </div>
-        <div class="service-box">
-            <a href="decryptP.html"><h2><u><i>Decrypt Image and Message</i></u></h2>
-            <p><b>Image decryption with a hidden message restores both the encrypted image and the embedded message. Using the correct decryption key, the image is unlocked, and the hidden message is extracted, ensuring secure access to both the visual content and the message.</b></p>
-            </a>
-        </div>
+</main>
+
+<!-- Footer Section -->
+<footer>
+    <p>&copy; 2024 A&D. All Rights Reserved.</p>
+    <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+</footer>
+
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+

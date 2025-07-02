@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A&D</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #1a1a1a;
+            color: #f0f0f0;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        header {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #2c2c2c;
+            padding: 10px 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .logo img {
+            height: 50px;
+            border-radius: 5px;
+        }
+
+        .menu a {
+            margin: 0 15px;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+
+        .menu a:hover {
+            color: #ffcc00;
+        }
+
+        .services {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 80%;
+            margin-top: 20px;
+        }
+
+        .service-box {
+            position: relative;
+            background-color: #333;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            margin-bottom: 20px;
+            width: 100%;
+            transition: transform 0.3s, box-shadow 0.3s;
+            max-width: 1000px;
+            min-width: 300px;
+            font-size: 2rem;
+        }
+
+        .service-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+        }
+
+        .service-icon {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .service-box:hover .service-icon {
+            transform: scale(1.1);
+        }
+
+        .service-info {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .service-info h3 {
+            margin: 10px 0;
+            font-size: 2rem;
+            color: #ffcc00;
+        }
+
+        .service-info a {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 15px;
+            background-color: #ffcc00;
+            color: #000;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .service-info a:hover {
+            background-color: #e6b800;
+            color: #fff;
+        }
+
+        nav {
+            background-color: rgb(13, 14, 13);
+            width: 100%;
+            color: rgb(226, 231, 231);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            box-shadow: 0 0 20px white;
+            font-size: 1.5rem;
+        }
+
+        nav .logo {
+            display: flex;
+        }
+
+        nav .logo p {
+            font-size: 2rem;
+            letter-spacing: 2px;
+            color: white;
+            padding-left: 10px;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+        }
+
+        nav .logo img {
+            width: 60px;
+            height: 60px;
+        }
+
+        nav .menu a {
+            text-decoration: none;
+            color: white;
+            padding: 10px 20px;
+            font-size: 1.2rem;
+            position: relative;
+        }
+
+        nav .menu a:hover {
+            color: rgb(186, 199, 75);
+        }
+
+        h1 {
+            font-size: 2rem;
+            letter-spacing: 1px;
+            text-align: center;
+            margin: 20px;
+        }
+
+        /* Logout Button Styling */
+        #logout-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #ff3333;
+            color: white;
+            border: none;
+            padding: 12px 18px;
+            font-size: 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            transition: background-color 0.3s;
+        }
+
+        #logout-button:hover {
+            background-color: #cc0000;
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .service-info h3 {
+                font-size: 1.5rem;
+            }
+
+            nav .logo p {
+                font-size: 1.5rem;
+            }
+
+            nav .menu a {
+                font-size: 1rem;
+            }
+
+            #logout-button {
+                font-size: 0.9rem;
+                padding: 10px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+<header>
+    <nav>
+        <div class="logo">
+            <img src="../image/bg.png" alt="ADED Logo">
+            <p>A&D</p>
+        </div>
+        <div class="menu">
+            <a href="index1.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="explore.html">Explore</a>
+            <a href="../Register/help.html">Help</a>
+        </div>
+    </nav>
+</header>
+<main>
+    <h1>Welcome to A&D: Your Secure Solutions for Encryption, Data Protection, and More!</h1>
+    <section class="services">
+        <div class="service-box">
+            <img src="../image/image1.jpg" alt="Encryption Decryption Icon" class="service-icon">
+            <div class="service-info">
+                <h3>Encryption Decryption Message</h3>
+                <a href="EDindex.html">Click Here</a>
+            </div>
+        </div>
+        <div class="service-box">
+            <img src="../image/imag2.jpg" alt="Data Hiding Icon" class="service-icon">
+            <div class="service-info">
+                <h3>Data Hiding through Image</h3>
+                <a href="ImageIndex.html">Click Here</a>
+            </div>
+        </div>
+        <div class="service-box">
+            <img src="../image/image3.jpg" alt="Password Manager Icon" class="service-icon">
+            <div class="service-info">
+                <h3>Password Manager</h3>
+                <a href="Password.html">Click Here</a>
+            </div>
+        </div>
+        <div class="service-box">
+            <img src="../image/image4.jpeg" alt="File Protector Icon" class="service-icon">
+            <div class="service-info">
+                <h3>File Protector</h3>
+                <a href="Findex.html">Click Here</a>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- Logout Button -->
+<button id="logout-button">Logout</button>
+
+<script>
+document.getElementById('logout-button').addEventListener('click', function() {
+    // Clear stored user_email for logout
+    localStorage.removeItem('user_email');
+
+    // Optional: clear all localStorage if you use other keys
+    localStorage.clear();
+
+    // Redirect to login page
+    window.location.href = '../Register/login.html';
+});
+</script>
+
+</body>
+</html>

@@ -1,337 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A&D</title>
-    
-    <style>
-       body {
-            margin: 0;
-            font-family: 'Arial', sans-serif;
-            background-color: #1a1a1a;
-            color: #f0f0f0;
-            line-height: 1.6;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px;
-         
-        }
-
-        header {
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: #2c2c2c;
-            padding: 10px 20px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-        }
-
-        .logo img {
-            height: 50px;
-            border-radius: 5px;
-        }
-
-        .menu a {
-            margin: 0 15px;
-            color: #ffffff;
-            text-decoration: none;
-            font-size: 1.5rem;
-            transition: color 0.3s;
-        }
-
-        .menu a:hover {
-            color: #ffcc00;
-        }
-
-        .services {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 80%;
-            margin-top: 20px;
-        }
-
-        .service-box {
-            position: relative;
-            background-color: #333;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-            overflow: hidden;
-            margin-bottom: 20px;
-            width: 100%;
-            transition: transform 0.3s, box-shadow 0.3s;
-            max-width: 1000px;
-            min-width: 300px;
-            font-size: 2rem ;
-        }
-
-        .service-box:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
-        }
-
-        .service-icon {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            transition: transform 0.3s;
-        }
-
-        .service-box:hover .service-icon {
-            transform: scale(1.1);
-        }
-
-        .service-info {
-            padding: 20px;
-            text-align: center;
-        }
-
-        .service-info h3 {
-            margin: 10px 0;
-            font-size: 3rem;
-            color: #ffcc00;
-        }
-
-        .service-info a {
-            display: inline-block;
-            margin-top: 10px;
-            padding: 10px 15px;
-            background-color: #ffcc00;
-            color: #000;
-            border-radius: 5px;
-            text-decoration: none;
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        .service-info a:hover {
-            background-color: #e6b800;
-            color: #fff;
-        }
-
-        footer {
-            width: 100%;
-            background-color: #232323;
-            padding: 40px 20px;
-            text-align: center;
-            color: #f0f0f0;
-            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.5);
-            margin-top: auto;
-            font-size: 14px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        footer h3 {
-            margin: 20px 0;
-            font-size: 22px;
-            color: #ffcc00;
-        }
-
-        footer p {
-            max-width: 900px;
-            line-height: 1.8;
-            margin-bottom: 20px;
-            text-align: justify;
-        }
-
-        footer ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 20px 0;
-        }
-
-        footer ul li {
-            margin: 10px 0;
-        }
-
-        footer a {
-            color: #ffcc00;
-            text-decoration: none;
-            margin: 0 10px;
-            font-size: 16px;
-            transition: color 0.3s;
-        }
-
-        footer a:hover {
-            color: #e6b800;
-        }
-
-        footer .social-icons {
-            margin-top: 20px;
-        }
-
-        footer .social-icons a {
-            margin: 0 10px;
-            font-size: 24px;
-        }
-
-        footer .social-icons a:hover {
-            color: #ffcc00;
-        }
-
-        .policy-container {
-            margin: 30px 0;
-            padding: 20px;
-            text-align: left;
-            background-color: #1a1a1a;
-            border: 1px solid #333;
-            border-radius: 10px;
-            max-width: 900px;
-        }
-
-        .policy-container h3 {
-            color: #ffcc00;
-        }
-
-        @media (min-width: 768px) {
-            .services {
-                flex-direction: row;
-                flex-wrap: wrap;
-                justify-content: space-between;
-                margin-left: 200px;
-            }
-
-            .service-box {
-                width: 48%;
-            }
-        }
-
-        @media (max-width: 600px) {
-            .menu {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .menu a {
-                margin: 10px 0;
-            }
-
-            .services {
-                width: 90%;
-            }
-        }
-        nav {
-            background-color: rgb(13, 14, 13);
-            width: 100%;
-            height: 20vh;
-            color: rgb(226, 231, 231);
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            box-shadow: 5.2px 5.2px 25.3px 5.2px white;
-            font-size: 1.5rem ;
-        }
-          
-        nav .logo {
-            display: flex;
-            margin-left: -145px;
-        }
-          
-        nav .logo p {
-            font-size: 4rem;
-            letter-spacing: 2px;
-            color: white;
-            padding-left: 9%;
-            font-family: Georgia, 'Times New Roman', Times, serif;
-        }
-          
-        nav .logo img {
-            margin-top: 55px;
-            width: 110px;
-            height: 110px;
-        }
-          
-        nav .menu a {
-            text-decoration: none;
-            color: white;
-            padding: 10px 20px;
-            font-size: 3rem;
-            position: relative;
-        }
-          
-        nav .menu a:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 0%;
-            height: 100%;
-            border-bottom: 2px solid indianred;
-            transition: 0.4s linear;
-        }
-          
-        nav .menu a:hover::before {
-            width: 90%;
-        }
-          
-        nav .menu a:hover {
-            color: rgb(186, 199, 75);
-        }
-          
-        main {
-            margin-top: 50px;
-            font-size: 3rem ;
-        }
-        h1 {
-            font-size: 3rem;
-            letter-spacing: 2px;
-        }
-        .he {
-            margin-left: 300px;
-        }
-    </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ADED - Landing Page</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+<style>
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-image: url("/image/image5.png");
+  color: #fff;
+  text-align: center;
+}
+.container {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  padding: 40px;
+  max-width: 90%;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.5);
+}
+@media screen and (min-width: 1200px) {
+  .container {
+    padding: 70px;
+  }
+}
+.logo {
+  font-size: 108px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.logo img {
+  width: 300px;
+  height: auto;
+  margin-bottom: 10px;
+}
+.tagline {
+  font-size: 30px;
+  margin-bottom: 30px;
+  color: #ccc;
+}
+.get-started-btn {
+  background-color: #f3f70b;
+  color: #030303;
+  border: 2px solid #080808;
+  padding: 12px 25px;
+  font-size: 30px;
+  font-weight: 600;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.3s;
+}
+.get-started-btn:hover {
+  background-color: #333;
+  transform: translateY(-2px);
+}
+.footer {
+  position: relative;
+  margin-top: 20px;
+  font-size: 12px;
+  color: #888;
+}
+</style>
 </head>
 <body>
-<header>
-    <nav>
-        <div class="logo">
-            <img src="image/image.png" alt="">
-            <p>A&D</p>
-        </div>
-        <div class="menu">
-            <a href="index.html">Home</a>
-            <a href="about.html">About</a>
-            <a href="explore.html">Explore</a>
-            <a href="help.html">Help</a>
-        </div>
-    </nav>
-</header>
- <main>
-        <h1>Welcome to A&D: Your Secure Solutions for Encryption, Data Protection, and More!</h1>
-        <section class="services">
-            <div class="service-box">
-                <img src="image/image1.jpg" alt="Encryption Decryption Icon" class="service-icon">
-                <div class="service-info">
-                    <h3>Encryption Decryption Message</h3>
-                    <a href="EDindex.html">Click Here</a>
-                </div>
-            </div>
-            <div class="service-box">
-                <img src="image/imag2.jpg" alt="Data Hiding Icon" class="service-icon">
-                <div class="service-info">
-                    <h3>Data Hiding through Image</h3>
-                    <a href="ImageIndex.html">Click Here</a>
-                </div>
-            </div>
-            <div class="service-box">
-                <img src="image/image3.jpg" alt="Password Manager Icon" class="service-icon">
-                <div class="service-info">
-                    <h3>Password Manager</h3>
-                    <a href="Password.html">Click Here</a>
-                </div>
-            </div>
-            <div class="service-box">
-                <img src="image/image4.jpeg" alt="File Protector Icon" class="service-icon">
-                <div class="service-info">
-                    <h3>File Protector</h3>
-                    <a href="Findex.html">Click Here</a>
-                </div>
-            </div>
-        </section>
-    </main>
+<div class="container">
+  <div class="logo">
+    <img src="image/bg.png" alt="ADED Logo">
+    ADED
+  </div>
+  <div class="tagline">Your All-in-One Encryption and Data Security App</div>
+  <button class="get-started-btn" onclick="window.location.href='Register/register.html'">Get Started</button>
+  <div class="footer">© 2025 ADED | All rights reserved</div>
+</div>
 </body>
 </html>

@@ -3,10 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>ED</title>
+    <title>File Encryptor</title>
     <style>
-            body {
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #000000;
+            color: aliceblue;
+        }
+        .container {
+            max-width: 500px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+        }
+
+        /* Increase size of text boxes */
+        input[type="file"], input[type="password"] {
+            width: 90%;
+            padding: 15px;
+            font-size: 2em;
+            margin-bottom: 20px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+        }
+
+        #downloadLink {
+            display: none;
+            margin-top: 20px;
+            color:white;
+        }
+
+         body {
             margin: 0;
             font-family: 'Arial', sans-serif;
             background-color: #1a1a1a;
@@ -16,7 +45,7 @@
             flex-direction: column;
             align-items: center;
             padding: 20px;
-            font-size: 3rem ;
+            
         }
 
         header {
@@ -243,7 +272,7 @@
         }
           
         nav .logo img {
-            margin-top: 10px;
+            margin-top: 55px;
             width: 110px;
             height: 110px;
         }
@@ -286,51 +315,125 @@
         .he {
             margin-left: 300px;
         }
-              .service-box {
-                background-color: #f4f4f4;
-                margin-left: 30px;
-                border: 1px solid #ddd;
-                border-radius: 30px;
-                padding: 20px;
-                width: 90%;
-                color: black;
-                font-size: 2rem;
-                box-shadow: 0 5px 10px whitesmoke;
-                margin-bottom: 20px;
-            }
-            .service-box a{
-                text-decoration: none;
-                color: #000000;
-            }
-        </style>
+
+        .form-box {
+            width: 60%;
+            margin: 0 auto;
+            padding: 20px;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #f9f9f9;
+            color: black;
+        }
+
+        input[type="text"], textarea {
+            width: 90%;
+            padding: 10px;
+            font-size: 2em;
+            margin-bottom: 15px;
+        }
+
+        textarea {
+            height: 150px;
+        }
+
+        button {
+            font-size: 2em;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: rgb(225, 212, 212);
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
 <body>
     <header>
         <nav>
             <div class="logo">
-                <img src="image.png" alt="">
+                <img src="../image/bg.png" alt="">
                 <p>A&D</p>
             </div>
             <div class="menu">
-                <a href="index.html">Home</a>
+                <a href="index1.html">Home</a>
                 <a href="about.html">About</a>
                 <a href="explore.html">Explore</a>
-                <a href="help.html">Help</a>
+                <a href="../Register/help.html">Help</a>
             </div>
         </nav>
+    </header><br>
+    <div class="container">
+        <h1>Encrypt File</h1>
+        <input type="file" id="fileInput" />
+        <input type="password" id="passwordInput" placeholder="Enter Encryption Key" />
+        <button id="encryptButton">Encrypt and Download</button>
+        <a id="downloadLink" download>Download Encrypted File</a>
     </div>
-  </header>
-        <br>
-        <h1>Welcome to Encryption and Decryption </h1>
-        <div class="service-box">
-            <a href="E.html"><h2><u><i>Encrypt Message</i></u></h2>
-            <p><b>Encrypting a message involves converting readable text (plaintext) into an unreadable format (ciphertext) using an encryption algorithm and a cryptographic key. The ciphertext secures the message, making it accessible only to those with the decryption key.</b></p>
-            </a>
-        </div>
-        <div class="service-box">
-            <a href="D.html"><h2><u><i>Decrypt Message</i></u></h2>
-            <p><b>Decrypting a message involves converting ciphertext back into its original, readable format (plaintext). This process uses a decryption algorithm and a cryptographic key, which must match the key used for encryption. The decryption algorithm reverses the encryption process, allowing authorized users to read the original message.</b></p>
-            </a>
-        </div>
+
+    <script>
+        async function encryptFile(file, password) {
+            const encoder = new TextEncoder();
+            const keyMaterial = await window.crypto.subtle.importKey(
+                'raw',
+                encoder.encode(password),
+                'PBKDF2',
+                false,
+                ['deriveBits', 'deriveKey']
+            );
+
+            const salt = window.crypto.getRandomValues(new Uint8Array(16));
+            const key = await window.crypto.subtle.deriveKey(
+                {
+                    name: 'PBKDF2',
+                    salt: salt,
+                    iterations: 100000,
+                    hash: 'SHA-256'
+                },
+                keyMaterial,
+                { name: 'AES-GCM', length: 256 },
+                false,
+                ['encrypt']
+            );
+
+            const fileData = await file.arrayBuffer();
+            const iv = window.crypto.getRandomValues(new Uint8Array(12));
+            const encryptedData = await window.crypto.subtle.encrypt(
+                { name: 'AES-GCM', iv: iv },
+                key,
+                fileData
+            );
+
+            return {
+                encrypted: new Uint8Array(encryptedData),
+                salt: salt,
+                iv: iv
+            };
+        }
+
+        document.getElementById("encryptButton").addEventListener("click", async () => {
+            const fileInput = document.getElementById("fileInput");
+            const password = document.getElementById("passwordInput").value;
+
+            if (fileInput.files.length === 0 || password === "") {
+                alert("Please select a file and enter a password!");
+                return;
+            }
+
+            const file = fileInput.files[0];
+            const { encrypted, salt, iv } = await encryptFile(file, password);
+            const blob = new Blob([salt, iv, encrypted], { type: 'application/octet-stream' });
+
+            const downloadLink = document.getElementById('downloadLink');
+            downloadLink.href = URL.createObjectURL(blob);
+            downloadLink.download = `encrypted_${file.name}`;
+            downloadLink.style.display = 'block';
+            downloadLink.innerText = `Download Encrypted File (${file.name})`;
+        });
+    </script>
 </body>
 </html>

@@ -3,24 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image Steganography: Encode Message with Password</title>
     <link rel="stylesheet" href="style.css">
+    <title>ED</title>
     <style>
-       
-        .container {
-            width: 600px;
-            margin: 0 auto;
-            text-align: center;
-        }
-        input[type="file"], input[type="text"], input[type="password"] {
-            margin: 10px;
-            font-size: 1em;
-        }
-        img {
-            max-width: 100%;
-            height: auto;
-        }
-        body {
+            body {
             margin: 0;
             font-family: 'Arial', sans-serif;
             background-color: #1a1a1a;
@@ -30,7 +16,7 @@
             flex-direction: column;
             align-items: center;
             padding: 20px;
-         
+            font-size: 3rem ;
         }
 
         header {
@@ -52,7 +38,7 @@
             margin: 0 15px;
             color: #ffffff;
             text-decoration: none;
-            font-size: 1.5rem;
+            font-size: 3rem;
             transition: color 0.3s;
         }
 
@@ -79,7 +65,7 @@
             transition: transform 0.3s, box-shadow 0.3s;
             max-width: 1000px;
             min-width: 300px;
-            font-size: 2rem ;
+            font-size: 3rem ;
         }
 
         .service-box:hover {
@@ -240,7 +226,7 @@
             justify-content: space-around;
             align-items: center;
             box-shadow: 5.2px 5.2px 25.3px 5.2px white;
-            font-size: 1.5rem ;
+            font-size: 3rem ;
         }
           
         nav .logo {
@@ -257,7 +243,7 @@
         }
           
         nav .logo img {
-            margin-top: 55px;
+            margin-top: 10px;
             width: 110px;
             height: 110px;
         }
@@ -300,166 +286,51 @@
         .he {
             margin-left: 300px;
         }
-          .form-box {
-            width: 60%; /* Adjust as needed */
-            margin: 0 auto; /* Center the box */
-            padding: 20px;
-            border: 2px solid #ccc; /* Border around the box */
-            border-radius: 10px; /* Rounded corners */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow for effect */
-            background-color: #f9f9f9; /* Light background color */
-            color:black;
-            font-size: 1em;
-        }
-
-        input[type="text"], input[type="email"], textarea {
-            width: 100%; /* Adjusted width */
-            padding: 10px;
-            font-size: 2em;
-            margin-bottom: 15px;
-        }
-
-        textarea {
-            height: 250px;
-        }
-
-        button {
-            font-size: 2em;
-            padding: 10px 20px;
-            background-color: #4CAF50;
-            color: rgb(225, 212, 212);
-            border: none;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #45a049; /* Button hover effect */
-        }
-        input[type="file"], input[type="password"] {
-            width: 90%;
-            padding: 15px;
-            font-size: 2em;
-            margin-bottom: 20px;
-            border: 2px solid #ccc;
-            border-radius: 5px;
-        }
-
-        #downloadLink {
-            display: none;
-            margin-top: 20px;
-            color:white;
-        }
-    </style>
+              .service-box {
+                background-color: #f4f4f4;
+                margin-left: 30px;
+                border: 1px solid #ddd;
+                border-radius: 30px;
+                padding: 20px;
+                width: 90%;
+                color: black;
+                font-size: 2rem;
+                box-shadow: 0 5px 10px whitesmoke;
+                margin-bottom: 20px;
+            }
+            .service-box a{
+                text-decoration: none;
+                color: #000000;
+            }
+        </style>
 </head>
 <body>
     <header>
         <nav>
             <div class="logo">
-                <img src="image.png" alt="">
+                <img src="../image/bg.png" alt="">
                 <p>A&D</p>
             </div>
             <div class="menu">
-                <a href="index.html">Home</a>
+                <a href="index1.html">Home</a>
                 <a href="about.html">About</a>
                 <a href="explore.html">Explore</a>
-                <a href="help.html">Help</a>
+                <a href="../Register/help.html">Help</a>
             </div>
         </nav>
-  </header><br>
-    <div class="container">
-        <h1>Encode Message in Image with Password</h1>
-        <input type="file" id="imageInput" accept="image/*"><br>
-        <input type="text" id="messageInput" placeholder="Enter message to hide"><br>
-        <input type="password" id="passwordInput" placeholder="Enter password"><br>
-        <button id="encodeBtn">Encode Message</button>
-        <a id="downloadLink" href="#" download="encoded_image.png" style="display:none;">Download Image</a>
-        <p id="output"></p>
-        <img id="uploadedImage" src="#" alt="Your Image" style="display:none;"/>
     </div>
-
-    <script>
-        const imageInput = document.getElementById('imageInput');
-        const messageInput = document.getElementById('messageInput');
-        const passwordInput = document.getElementById('passwordInput');
-        const encodeBtn = document.getElementById('encodeBtn');
-        const uploadedImage = document.getElementById('uploadedImage');
-        const output = document.getElementById('output');
-        const downloadLink = document.getElementById('downloadLink');
-        let imageDataUrl;
-
-        imageInput.addEventListener('change', (event) => {
-            const file = event.target.files[0];
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                uploadedImage.src = e.target.result;
-                uploadedImage.style.display = 'block';
-                imageDataUrl = e.target.result;
-            };
-            reader.readAsDataURL(file);
-        });
-
-        encodeBtn.addEventListener('click', () => {
-            const message = messageInput.value;
-            const password = passwordInput.value;
-            if (!imageDataUrl || !message || !password) {
-                alert("Please upload an image, enter a message, and enter a password.");
-                return;
-            }
-
-            try {
-                const image = new Image();
-                image.src = imageDataUrl;
-                image.onload = function() {
-                    const canvas = document.createElement('canvas');
-                    const ctx = canvas.getContext('2d');
-                    canvas.width = image.width;
-                    canvas.height = image.height;
-                    ctx.drawImage(image, 0, 0);
-
-                    const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-                    const data = imgData.data;
-
-                    // Encrypt message with password
-                    const encryptedMessage = encryptMessage(message, password);
-
-                    // Encode encrypted message into image
-                    const binaryMessage = messageToBinary(encryptedMessage);
-                    for (let i = 0; i < binaryMessage.length; i++) {
-                        data[i * 4] = (data[i * 4] & 0xFE) | (binaryMessage[i] & 1); // Encode in LSB of red channel
-                    }
-                    ctx.putImageData(imgData, 0, 0);
-
-                    const encodedImageDataUrl = canvas.toDataURL('image/png');
-                    uploadedImage.src = encodedImageDataUrl;
-                    downloadLink.href = encodedImageDataUrl;
-                    downloadLink.style.display = 'inline';
-                    output.textContent = "Message encoded successfully in the image with password. You can now download the image.";
-                };
-            } catch (error) {
-                console.error("Encoding Error:", error);
-                output.textContent = "Failed to encode message.";
-            }
-        });
-
-        function messageToBinary(message) {
-            let binaryMessage = '';
-            for (let i = 0; i < message.length; i++) {
-                binaryMessage += message.charCodeAt(i).toString(2).padStart(8, '0');
-            }
-            return binaryMessage;
-        }
-
-        function encryptMessage(message, password) {
-    const delimiter = "###END###"; // Add a delimiter to mark the end of the message
-    const messageWithDelimiter = message + delimiter; // Append delimiter to the message
-
-    let encryptedMessage = '';
-    for (let i = 0; i < messageWithDelimiter.length; i++) {
-        encryptedMessage += String.fromCharCode(messageWithDelimiter.charCodeAt(i) ^ password.charCodeAt(i % password.length));
-    }
-    return encryptedMessage;
-}
-
-    </script>
+  </header>
+        <br>
+        <h1>Welcome to Encryption and Decryption </h1>
+        <div class="service-box">
+            <a href="E.html"><h2><u><i>Encrypt Message</i></u></h2>
+            <p><b>Encrypting a message involves converting readable text (plaintext) into an unreadable format (ciphertext) using an encryption algorithm and a cryptographic key. The ciphertext secures the message, making it accessible only to those with the decryption key.</b></p>
+            </a>
+        </div>
+        <div class="service-box">
+            <a href="D.html"><h2><u><i>Decrypt Message</i></u></h2>
+            <p><b>Decrypting a message involves converting ciphertext back into its original, readable format (plaintext). This process uses a decryption algorithm and a cryptographic key, which must match the key used for encryption. The decryption algorithm reverses the encryption process, allowing authorized users to read the original message.</b></p>
+            </a>
+        </div>
 </body>
 </html>
