@@ -7,7 +7,7 @@ from urllib.parse import quote_plus
 from datetime import datetime
 
 app = FastAPI()
-
+app.mount("/static", StaticFiles(directory="Register/static"), name="static")
 # CORS for frontend compatibility
 app.add_middleware(
     CORSMiddleware,
